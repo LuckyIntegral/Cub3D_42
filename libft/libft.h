@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 13:33:31 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/16 12:40:50 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/16 15:22:38 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # ifndef GNL_BUFFER
 #  define GNL_BUFFER 10
 # endif
+
+# define READ 0
+# define CLEAN 1
 
 typedef struct s_list
 {

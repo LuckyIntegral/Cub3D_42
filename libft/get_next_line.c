@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:07:09 by vfrants           #+#    #+#             */
-/*   Updated: 2023/10/18 16:40:26 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/16 20:26:57 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static char	*ft_get_rest(char *str, size_t offset)
 		str++;
 	res = (char *)malloc(sizeof (char) * (ft_strlen(str) + 1));
 	if (!res)
-		return (free(str), NULL);
+		return (free(buf_str), NULL);
 	buf_res = res;
 	while (*str)
 		*buf_res++ = *str++;
@@ -115,7 +115,7 @@ char	*get_next_line(int fd, int mode)
 	static char	*buffer[10];
 	char		*str;
 
-	if (mode == 1 << 31)
+	if (mode == CLEAN)
 		return (free(buffer[fd]), NULL);
 	if (fd < 0 || GNL_BUFFER <= 0)
 		return (NULL);

@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/16 21:12:47 by vfrants          ###   ########.fr       */
+/*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
+/*   Updated: 2023/11/16 14:47:47 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	init_input_structure(t_input *input)
 {
-	t_input	input;
-
-	validate_argv(argc, argv);
-	init_input_structure(&input);
-	input_parser(&input, argv[1]);
-
-	printf("data we (%s)\n", input.west);
-	printf("data ea (%s)\n", input.east);
-	printf("data so (%s)\n", input.south);
-	printf("data no (%s)\n", input.north);
-	printf("data floor (%d)\n", input.floor);
-	printf("data ceil (%d)\n", input.ceiling);
-
-	clean_input_structure(&input);
+	input->map = NULL;
+	input->north = NULL;
+	input->south = NULL;
+	input->west = NULL;
+	input->east = NULL;
+	input->floor = 0;
+	input->ceiling = 0;
 }

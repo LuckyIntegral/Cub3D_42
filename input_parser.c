@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_3d.h                                           :+:      :+:    :+:   */
+/*   input_parser.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/16 12:38:58 by vfrants          ###   ########.fr       */
+/*   Created: 2023/11/16 14:50:06 by vfrants           #+#    #+#             */
+/*   Updated: 2023/11/16 21:14:45 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB_3D_H
-# define CUB_3D_H
+#include "cub3d.h"
 
-# include <mlx.h>
-# include <fcntl.h>
-# include <stdio.h>
-# include <errno.h>
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include "libft/libft.h"
+void	input_parser(t_input *data, char *file)
+{
+	const int	fd = open(file, O_RDONLY);
 
-#endif
+	if (fd < 0)
+		error_handler("open", DEFAULT);
+	parse_elements(data, fd);
+	get_next_line(fd, CLEAN);
+	close(fd);
+}

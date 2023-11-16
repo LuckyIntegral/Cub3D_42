@@ -6,7 +6,7 @@ CFLAGS	= -Wall -Wextra -Werror -g -MD -MP
 LIBDIR		= ./libft
 LIBFT		= ${LIBDIR}/libft.a
 
-SRCS		= main.c
+SRCS		= exit_utils.c input_validator.c input_parser.c input_parser_2.c init.c main.c
 
 OBJS_DIR	= objs
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
@@ -16,7 +16,7 @@ all		: $(NAME)
 
 $(NAME)	: ${OBJS}
 		make --no-print-directory -C ${LIBDIR} all
-		$(CC) $(CFLAGS) -o $@ $<
+		$(CC) $(CFLAGS) -o $@ $^ -L. ${LIBFT}
 
 objs/%.o	: %.c
 		@mkdir -p $(dir $@)

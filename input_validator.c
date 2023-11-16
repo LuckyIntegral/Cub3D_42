@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   input_validator.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/16 21:12:47 by vfrants          ###   ########.fr       */
+/*   Created: 2023/11/16 13:02:29 by vfrants           #+#    #+#             */
+/*   Updated: 2023/11/16 21:13:31 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+int	ends_with(char *str, char *format)
 {
-	t_input	input;
+	const int	slen = ft_strlen(str);
+	const int	flen = ft_strlen(format);
 
-	validate_argv(argc, argv);
-	init_input_structure(&input);
-	input_parser(&input, argv[1]);
+	if (slen < flen)
+		return (0);
+	str += slen - flen;
+	while (*str)
+		if (*str++ != *format++)
+			return (0);
+	return (1);
+}
 
-	printf("data we (%s)\n", input.west);
-	printf("data ea (%s)\n", input.east);
-	printf("data so (%s)\n", input.south);
-	printf("data no (%s)\n", input.north);
-	printf("data floor (%d)\n", input.floor);
-	printf("data ceil (%d)\n", input.ceiling);
-
-	clean_input_structure(&input);
+void	validate_argv(const int argc, char **argv)
+{
+	if (argc != 2)
+		error_handler(INVALID_NUMBER, CUSTOM);
+	if (!ends_with(argv[1], ".cub"))
+		error_handler(INVALID_EXTENTION, CUSTOM);
 }
