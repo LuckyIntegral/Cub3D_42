@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:10:14 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/16 21:10:53 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/17 13:34:01 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,11 @@ static char	*take_val(char *str, char *direction)
 
 	if (!str)
 		return (NULL);
-	if (ft_strlen(str) < 4 || ft_strncmp(str, direction, 3))
+	if (ft_strlen(str) < 5 || ft_strncmp(str, direction, 3))
 		return (free(str), NULL);
 	res = ft_strdup(str + 3);
+	if (res)
+		res[ft_strlen(res) - 1] = '\0';
 	return (free(str), res);
 }
 
