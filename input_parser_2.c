@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:10:14 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/17 13:34:01 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/17 15:39:08 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,17 @@ static void	exit_while_parsing(t_input *data, int fd)
 	error_handler(INVALID_FILE_CONTENT, CUSTOM);
 }
 
-static int	is_valid_rgb(char *str, char item)
+static int	is_valid_rgb(char *str)
 {
 	const int	len = ft_strlen(str);
 	int			i;
 	int			j;
 
-	if (len < 8 || len > 14)
+	if (len < 8 || !ft_contains("CF", *str++) || *str++ != ' ')
 		return (0);
-	if (item == 'F' && *str++ != 'F')
-		return (0);
-	else if (item == 'C' && *str++ != 'C')
-		return (0);
-	if (*str++ != ' ')
+	while (*str == ' ')
+		str++;
+	if (*str == '\0' || *str == '\n')
 		return (0);
 	j = 0;
 	while (j++ < 3)
@@ -57,45 +55,54 @@ static int	is_valid_rgb(char *str, char item)
 	return (1);
 }
 
-static char	*take_val(char *str, char *direction)
+static int	take_val(char *str, t_input *data)
 {
 	char	*res;
 
 	if (!str)
-		return (NULL);
-	if (ft_strlen(str) < 5 || ft_strncmp(str, direction, 3))
-		return (free(str), NULL);
-	res = ft_strdup(str + 3);
-	if (res)
-		res[ft_strlen(res) - 1] = '\0';
-	return (free(str), res);
+		return (1);
+	if (ft_strlen(str) < 8 || !ends_with(str, ".xpm\n")
+		|| !(!ft_strncmp(str, "NO ", 3) || !ft_strncmp(str, "SO ", 3)
+		|| !ft_strncmp(str, "EA ", 3) || !ft_strncmp(str, "WE ", 3)))
+		return (1);
+	res = ft_strtrim(str + 3, " \n");
+	if (!res)
+		return (1);
+	if (*str == 'N')
+		data->north = res;
+	else if (*str == 'S')
+		data->south = res;
+	else if (*str == 'E')
+		data->east = res;
+	else
+	 	data->west = res;
+	return (0);
 }
 
 void	parse_elements(t_input *data, const int fd)
 {
 	char	*temp;
+	int		i;
 
-	data->north = take_val(skip_new_lines(get_next_line(fd, READ), fd), "NO ");
-	if (!data->north)
-		exit_while_parsing(data, fd);
-	data->south = take_val(skip_new_lines(get_next_line(fd, READ), fd), "SO ");
-	if (!data->south)
-		exit_while_parsing(data, fd);
-	data->west = take_val(skip_new_lines(get_next_line(fd, READ), fd), "WE ");
-	if (!data->west)
-		exit_while_parsing(data, fd);
-	data->east = take_val(skip_new_lines(get_next_line(fd, READ), fd), "EA ");
-	if (!data->east)
-		exit_while_parsing(data, fd);
-	temp = skip_new_lines(get_next_line(fd, READ), fd);
-	if (!temp || !is_valid_rgb(temp, 'F'))
-		(free(temp), exit_while_parsing(data, fd));
-	data->floor = (ft_atoi(temp + 2) << 16) + (ft_atoi(ft_strchr(temp, ','))
-			<< 8) + (ft_atoi(ft_strrchr(temp, ',')));
-	(free(temp), temp = skip_new_lines(get_next_line(fd, READ), fd));
-	if (!temp || !is_valid_rgb(temp, 'C'))
-		(free(temp), exit_while_parsing(data, fd));
-	data->ceiling = (ft_atoi(temp + 2) << 16) + (ft_atoi(ft_strchr(temp, ','))
-			<< 8) + (ft_atoi(ft_strrchr(temp, ',')));
-	free(temp);
+	i = 0;
+	while (i++ < 6)
+	{
+		temp = skip_new_lines(get_next_line(fd, READ), fd);
+		if (temp == NULL)
+			exit_while_parsing(data, fd);
+		if (is_valid_rgb(temp) && *temp == 'C')
+			data->ceiling = (ft_atoi(temp + 2) << 16)
+				+ (ft_atoi(ft_strchr(temp, ',')) << 8)
+				+ (ft_atoi(ft_strrchr(temp, ',')));
+		else if (is_valid_rgb(temp))
+			data->floor = (ft_atoi(temp + 2) << 16)
+				+ (ft_atoi(ft_strchr(temp, ',')) << 8)
+				+ (ft_atoi(ft_strrchr(temp, ',')));
+		else if (take_val(temp, data))
+		{
+			free(temp);
+			exit_while_parsing(data, fd);
+		}
+		free(temp);
+	}
 }
