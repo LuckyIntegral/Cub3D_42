@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:10:14 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/17 15:52:32 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/17 15:55:15 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	take_val(char *str, t_input *data)
 		return (1);
 	if (ft_strlen(str) < 8 || !ends_with(str, ".xpm\n")
 		|| !(!ft_strncmp(str, "NO ", 3) || !ft_strncmp(str, "SO ", 3)
-		|| !ft_strncmp(str, "EA ", 3) || !ft_strncmp(str, "WE ", 3)))
+			|| !ft_strncmp(str, "EA ", 3) || !ft_strncmp(str, "WE ", 3)))
 		return (1);
 	res = ft_strtrim(str + 3, " \n");
 	if (!res)
@@ -75,7 +75,7 @@ static int	take_val(char *str, t_input *data)
 	else if (*str == 'E')
 		data->east = res;
 	else
-	 	data->west = res;
+		data->west = res;
 	return (0);
 }
 
@@ -92,7 +92,7 @@ void	parse_elements(t_input *data, const int fd)
 			exit_while_parsing(data, fd);
 		if (is_valid_rgb(temp) && *temp == 'C')
 			data->ceiling = (ft_atoi(temp + 2) << 16)
-				+ (ft_atoi(ft_strchr(temp + 2, ',') + 1))
+				+ (ft_atoi(ft_strchr(temp + 2, ',') + 1) << 8)
 				+ (ft_atoi(ft_strrchr(temp + 2, ',') + 1));
 		else if (is_valid_rgb(temp))
 			data->floor = (ft_atoi(temp + 2) << 16)
