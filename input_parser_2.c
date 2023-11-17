@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:10:14 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/17 15:39:08 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/17 15:52:32 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,12 @@ void	parse_elements(t_input *data, const int fd)
 			exit_while_parsing(data, fd);
 		if (is_valid_rgb(temp) && *temp == 'C')
 			data->ceiling = (ft_atoi(temp + 2) << 16)
-				+ (ft_atoi(ft_strchr(temp, ',')) << 8)
-				+ (ft_atoi(ft_strrchr(temp, ',')));
+				+ (ft_atoi(ft_strchr(temp + 2, ',') + 1))
+				+ (ft_atoi(ft_strrchr(temp + 2, ',') + 1));
 		else if (is_valid_rgb(temp))
 			data->floor = (ft_atoi(temp + 2) << 16)
-				+ (ft_atoi(ft_strchr(temp, ',')) << 8)
-				+ (ft_atoi(ft_strrchr(temp, ',')));
+				+ (ft_atoi(ft_strchr(temp + 2, ',') + 1) << 8)
+				+ (ft_atoi(ft_strrchr(temp + 2, ',') + 1));
 		else if (take_val(temp, data))
 		{
 			free(temp);

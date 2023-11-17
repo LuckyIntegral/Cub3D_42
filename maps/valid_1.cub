@@ -3,7 +3,7 @@ SO ./south.xpm
 WE ./west.xpm
 EA ./east.xpm
 
-F 1,0,0
+F 1,0,1
 C 0,1,0
 
 1111111111111111111111111
