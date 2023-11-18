@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:08:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/16 16:48:30 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/18 21:00:20 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	clean_input_structure(t_input *data)
 	}
 	if (data->map)
 	{
-		free(data->map);
+		ft_free_split(data->map);
 		data->map = NULL;
 	}
 }

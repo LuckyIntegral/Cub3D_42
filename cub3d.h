@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/16 21:13:47 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/18 20:03:05 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef enum e_error_mode
 typedef struct s_input
 {
 	char	**map;
+	int		width; // I feel file we will mess them up really soon:(
+	int		height; // 100%
 	char	*north;
 	char	*south;
 	char	*west;
@@ -50,6 +52,8 @@ void	error_handler(char *str, int mode);
 // input part
 void	parse_elements(t_input *data, const int fd);
 void	validate_argv(const int argc, char **argv);
+void	exit_while_parsing(t_input *data, int fd);
+char	*skip_new_lines(char *str, const int fd);
 void	input_parser(t_input *data, char *file);
 
 // init functions

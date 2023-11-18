@@ -6,13 +6,13 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:10:14 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/17 15:55:15 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/18 13:38:08 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char	*skip_new_lines(char *str, const int fd)
+char	*skip_new_lines(char *str, const int fd)
 {
 	while (str && ft_is_blank(str))
 	{
@@ -22,7 +22,7 @@ static char	*skip_new_lines(char *str, const int fd)
 	return (str);
 }
 
-static void	exit_while_parsing(t_input *data, int fd)
+void	exit_while_parsing(t_input *data, int fd)
 {
 	close(fd);
 	get_next_line(fd, CLEAN);
