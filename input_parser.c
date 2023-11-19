@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:50:06 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 18:26:22 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/19 20:49:52 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	count_max_len(t_list *list)
 		return (0);
 	while (list)
 	{
-		mlen = ft_max(mlen, ft_strlen((char *) list->content) -
-			ft_contains(list->content, '\n'));
+		mlen = ft_max(mlen, ft_strlen((char *) list->content)
+				- ft_contains(list->content, '\n'));
 		list = list->next;
 	}
 	return (mlen);
@@ -103,7 +103,6 @@ static void	parse_map(t_input *data, const int fd)
 void	input_parser(t_input *data, char *file)
 {
 	const int	fd = open(file, O_RDONLY);
-	int			valid;
 
 	if (fd < 0)
 		error_handler("open", DEFAULT);
@@ -114,12 +113,9 @@ void	input_parser(t_input *data, char *file)
 	data->width = ft_strlen(data->map[0]);
 	while (data->map[data->height])
 		data->height++;
-	valid = is_valid_map(data);
-	if (close(fd) == -1 || !valid)
+	if (close(fd) == -1)
 	{
 		clean_input_structure(data);
-		if (!valid)
-			error_handler(INVALID_FILE_CONTENT, CUSTOM);
 		error_handler("close", DEFAULT);
 	}
 }

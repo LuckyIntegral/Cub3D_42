@@ -6,30 +6,30 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:54:09 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 16:29:03 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/19 22:29:21 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	find_player(t_input *data)
+static int	find_player(t_data *data)
 {
 	int		x;
 	int		y;
 
 	y = 0;
-	while (y < data->height)
+	while (y < data->input.height)
 	{
 		x = 0;
-		while (x < data->width)
+		while (x < data->input.width)
 		{
-			if (ft_contains("NSWE", data->map[y][x]))
+			if (ft_contains("NSWE", data->input.map[y][x]))
 			{
 				if (data->player.player)
 					return (1);
-				data->player.player = data->map[y][x];
-				data->player.x = x;
-				data->player.y = y;
+				data->player.player = data->input.map[y][x];
+				data->player.x = x * 64;
+				data->player.y = y * 64;
 			}
 			x++;
 		}
@@ -103,15 +103,15 @@ static int	check_walls(t_input *data)
 	return (0);
 }
 
-int	is_valid_map(t_input *data)
+int	is_valid_map(t_data *data)
 {
 	if (find_player(data))
 		return (0);
-	if (validate_chars(data))
+	if (validate_chars(&data->input))
 		return (0);
-	if (check_borders(data))
+	if (check_borders(&data->input))
 		return (0);
-	if (check_walls(data))
+	if (check_walls(&data->input))
 		return (0);
 	return (1);
 }

@@ -1,5 +1,5 @@
 EA ./textures/east.xpm
-NO ./textures/north.xpm
+NO ./textures/test.xpm
 SO ./textures/south.xpm
 WE ./textures/west.xpm
 
@@ -23,8 +23,3 @@ C 0,1,0
     100001 100001
     100001 100001
     111111 111111
-
-
-
-
-

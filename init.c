@@ -6,24 +6,56 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 14:18:12 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/19 22:21:03 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_input_structure(t_input *input)
+int	init_images(t_data *data)
 {
-	input->map = NULL;
-	input->width = 0;
-	input->height = 0;
-	input->north = NULL;
-	input->south = NULL;
-	input->west = NULL;
-	input->east = NULL;
-	input->floor = 0;
-	input->ceiling = 0;
-	input->player.player = 0;
-	input->player.x = 0;
-	input->player.y = 0;
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	data->east = mlx_xpm_file_to_image(data->mlx_ptr, data->input.east, &x, &y);
+	if (!data->east)
+		return (1);
+	data->west = mlx_xpm_file_to_image(data->mlx_ptr, data->input.west, &x, &y);
+	if (!data->west)
+		return (1);
+	data->south = mlx_xpm_file_to_image(data->mlx_ptr,
+		data->input.south, &x, &y);
+	if (!data->south)
+		return (1);
+	data->north = mlx_xpm_file_to_image(data->mlx_ptr,
+		data->input.north, &x, &y);
+	if (!data->north)
+		return (1);
+	return (0);
+}
+
+void	init_structure(t_data *data)
+{
+	data->mlx_ptr = NULL;
+	data->mlx_window = NULL;
+	data->east = NULL;
+	data->west = NULL;
+	data->south = NULL;
+	data->north = NULL;
+	data->input.map = NULL;
+	data->input.width = 0;
+	data->input.height = 0;
+	data->input.north = NULL;
+	data->input.south = NULL;
+	data->input.west = NULL;
+	data->input.east = NULL;
+	data->input.floor = 0;
+	data->input.ceiling = 0;
+	data->player.player = 0;
+	data->player.x = 0;
+	data->player.y = 0;
+	data->player.dx = 0;
+	data->player.dy = 0;
 }
