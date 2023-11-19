@@ -1,0 +1,7 @@
+.nfs*
+.vscode/*
+/objs
+/libft/*.o
+libft/libft.a
+cub3D
+.vscode
