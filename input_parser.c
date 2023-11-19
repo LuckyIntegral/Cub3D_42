@@ -6,12 +6,11 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:50:06 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/18 21:39:26 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/19 14:59:06 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft/libft.h"
 
 static char	*append_offset(void *data, int size)
 {
@@ -111,5 +110,14 @@ void	input_parser(t_input *data, char *file)
 	data->width = ft_strlen(data->map[0]);
 	while (data->map[data->height])
 		data->height++;
-	close(fd);
+	if (!is_valid_map(data))
+	{
+		clean_input_structure(data);
+		error_handler(INVALID_FILE_CONTENT, CUSTOM);
+	}
+	if (close(fd) == -1)
+	{
+		clean_input_structure(data);
+		error_handler("close", DEFAULT);
+	}
 }

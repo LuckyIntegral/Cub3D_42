@@ -3,10 +3,11 @@ CC		= cc
 RM		= rm -rf
 CFLAGS	= -Wall -Wextra -Werror -g -MD -MP
 
-LIBDIR		= ./libft
-LIBFT		= ${LIBDIR}/libft.a
+LIBDIR	= ./libft
+LIBFT	= ${LIBDIR}/libft.a
 
-SRCS		= exit_utils.c input_validator.c input_parser.c input_parser_2.c init.c main.c
+SRCS	= exit_utils.c input_validator.c input_parser.c input_parser_2.c \
+		map_validator.c init.c main.c
 
 OBJS_DIR	= objs
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

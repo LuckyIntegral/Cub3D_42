@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/18 21:32:42 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/19 15:04:31 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	main(int argc, char **argv)
 	printf("data ea (%s)\n", input.east);
 	printf("data floor (%d)\n", input.floor);
 	printf("data ceil (%d)\n", input.ceiling);
+
+	printf("player %c, {%d, %d}\n", input.player.player, input.player.x, input.player.y);
 
 	printf("map\n");
 	for (int i = 0; i < input.height; i++) {

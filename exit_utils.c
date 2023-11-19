@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:08:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/18 21:00:20 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/19 15:00:02 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	error_handler(char *str, int mode)
 {
+	write(2, "Error,\n", 7);
 	if (mode == DEFAULT)
 		perror(str);
 	else

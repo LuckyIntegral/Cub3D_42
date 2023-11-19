@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/18 20:03:11 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/19 14:18:12 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,7 @@ void	init_input_structure(t_input *input)
 	input->east = NULL;
 	input->floor = 0;
 	input->ceiling = 0;
+	input->player.player = 0;
+	input->player.x = 0;
+	input->player.y = 0;
 }

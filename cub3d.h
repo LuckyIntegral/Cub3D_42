@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/18 20:03:05 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/19 14:57:22 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,34 @@ typedef enum e_error_mode
 	CUSTOM
 }	t_error_mode;
 
+typedef struct s_player
+{
+	char	player;
+	int		x;
+	int		y;
+}	t_player;
+
 typedef struct s_input
 {
-	char	**map;
-	int		width; // I feel file we will mess them up really soon:(
-	int		height; // 100%
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	int		floor;
-	int		ceiling;
+	char		**map;
+	t_player	player;
+	int			width;
+	int			height;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	int			floor;
+	int			ceiling;
 }	t_input;
 
 // exit utils
 void	clean_input_structure(t_input *data);
 void	error_handler(char *str, int mode);
+
+// map validation
+int		is_valid_map(t_input *data);
+
 
 // input part
 void	parse_elements(t_input *data, const int fd);
