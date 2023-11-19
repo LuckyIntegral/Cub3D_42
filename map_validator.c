@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:54:09 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 14:56:51 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/19 16:29:03 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,27 @@ static int	validate_chars(t_input *data)
 	return (0);
 }
 
-static int	no_walls(t_input *data)
+static int	check_walls(t_input *data)
 {
-	(void) data;
+	int		x;
+	int		y;
+
+	y = 1;
+	while (y < data->height - 1)
+	{
+		x = 1;
+		while (x < data->width - 1)
+		{
+			if (ft_contains("NSWE0", data->map[y][x]))
+			{
+				if (data->map[y][x + 1] == ' ' || data->map[y][x -1] == ' '
+					|| data->map[y + 1][x] == ' ' || data->map[y - 1][x] == ' ')
+					return (1);
+			}
+			x++;
+		}
+		y++;
+	}
 	return (0);
 }
 
@@ -93,7 +111,7 @@ int	is_valid_map(t_input *data)
 		return (0);
 	if (check_borders(data))
 		return (0);
-	if (no_walls(data))
+	if (check_walls(data))
 		return (0);
 	return (1);
 }

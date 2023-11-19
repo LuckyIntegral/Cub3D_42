@@ -6,11 +6,33 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:02:29 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 14:54:35 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/19 18:24:53 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	trim_map(t_input *data)
+{
+	int	last_full;
+	int	row;
+
+	last_full = 0;
+	row = 0;
+	while (data->map[row])
+	{
+		if (!ft_is_blank(data->map[row]))
+			last_full = row;
+		row++;
+	}
+	if (row == last_full)
+		return ;
+	while (data->map[++last_full])
+	{
+		free(data->map[last_full]);
+		data->map[last_full] = NULL;
+	}
+}
 
 int	ends_with(char *str, char *format)
 {

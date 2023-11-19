@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 14:57:22 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/19 18:09:14 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ void	error_handler(char *str, int mode);
 // map validation
 int		is_valid_map(t_input *data);
 
-
 // input part
 void	parse_elements(t_input *data, const int fd);
 void	validate_argv(const int argc, char **argv);
 void	exit_while_parsing(t_input *data, int fd);
 char	*skip_new_lines(char *str, const int fd);
 void	input_parser(t_input *data, char *file);
+void	trim_map(t_input *data);
 
 // init functions
 void	init_input_structure(t_input *input);

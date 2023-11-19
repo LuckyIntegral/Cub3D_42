@@ -34,7 +34,7 @@ fclean	:
 re		: fclean all
 
 test	: all
-	clear; valgrind --leak-check=full --track-origins=yes --track-fds=yes --show-reachable=yes --show-leak-kinds=all --error-limit=no ./$(NAME)
+	clear; valgrind --leak-check=full --track-origins=yes --show-reachable=yes --show-leak-kinds=all --error-limit=no -s ./$(NAME) maps/valid_1.cub
 
 -include $(DEPS)
 

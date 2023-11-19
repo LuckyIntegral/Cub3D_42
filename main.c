@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 15:04:31 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/19 18:29:16 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	main(int argc, char **argv)
 
 	printf("player %c, {%d, %d}\n", input.player.player, input.player.x, input.player.y);
 
-	printf("map\n");
+	printf("map size: width = %d, height = %d\n", input.width, input.height);
 	for (int i = 0; i < input.height; i++) {
-		printf("%s\n", input.map[i]);
+		printf("%02d)%s\n", i + 1, input.map[i]);
 	}
 
 	clean_input_structure(&input);
