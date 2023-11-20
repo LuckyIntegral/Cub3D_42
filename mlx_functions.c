@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 14:36:34 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 14:36:49 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	bresenham(t_data *data, int x, int y)
 	ex /= max;
 	while ((int)(x - data->player.x) || (int)(y - data->player.y))
 	{
-		printf("x = %d, y = %d\n", (int)x, (int)y);
 		index = WIDTH * (int)y + (int)x;
 		if (y < HEIGHT && index >= 0 && y >= 0 && x >= 0
 			&& x < WIDTH)
