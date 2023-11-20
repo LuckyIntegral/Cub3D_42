@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 16:26:01 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:40:09 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ int	key_handler(int key, t_data *data)
 {
 	if (key == ESC)
 		close_game(data);
-	else if (key == W || key == XK_Up)
+	else if (key == W )
 		go_forward(data);
 	else if (key == A )
 		go_left(data);
-	else if (key == S || key == XK_Down)
+	else if (key == S )
 		go_backward(data);
 	else if (key == D )
 		go_right(data);
