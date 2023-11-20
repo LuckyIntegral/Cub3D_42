@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:54:09 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 16:24:50 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:41:14 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 void	set_camera(t_data *data, int x, int y)
 {
-	data->x_dir = x * 64 - 100 * (data->input.map[y][x] == 'W') + 100
+	data->x_dir = x * 64 - PLANE_L * (data->input.map[y][x] == 'W') + PLANE_L
 		* (data->input.map[y][x] == 'E');
-	data->y_dir = y * 64 - 100 * (data->input.map[y][x] == 'N') + 100
+	data->y_dir = y * 64 - PLANE_L * (data->input.map[y][x] == 'N') + PLANE_L
 		* (data->input.map[y][x] == 'S');
-	data->x_plane1 = data->x_dir - 100 * (data->input.map[y][x] == 'N') + 100
-		* (data->input.map[y][x] == 'S');
-	data->y_plane1 = data->y_dir - 100 * (data->input.map[y][x] == 'W') + 100
-		* (data->input.map[y][x] == 'E');
-	data->x_plane2 = data->x_dir + 100 * (data->input.map[y][x] == 'N') - 100
-		* (data->input.map[y][x] == 'S');
-	data->y_plane2 = data->y_dir + 100 * (data->input.map[y][x] == 'W') - 100
-		* (data->input.map[y][x] == 'E');
+	data->x_plane1 = data->x_dir - PLANE_L * (data->input.map[y][x] == 'N')
+		+ PLANE_L * (data->input.map[y][x] == 'S');
+	data->y_plane1 = data->y_dir - PLANE_L * (data->input.map[y][x] == 'W')
+		+ PLANE_L * (data->input.map[y][x] == 'E');
+	data->x_plane2 = data->x_dir + PLANE_L * (data->input.map[y][x] == 'N')
+		- PLANE_L * (data->input.map[y][x] == 'S');
+	data->y_plane2 = data->y_dir + PLANE_L * (data->input.map[y][x] == 'W')
+		- PLANE_L * (data->input.map[y][x] == 'E');
 	printf("x_plane1: %f\n", data->x_plane1);
 	printf("y_plane1: %f\n", data->y_plane1);
 	printf("x_plane2: %f\n", data->x_plane2);

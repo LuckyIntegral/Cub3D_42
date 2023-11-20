@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 16:22:44 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:41:32 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # define CROSS 17
 # define SPEED 10
 # define ROTATE_SPEED 0.1
+# define PLANE_L 50
 
 typedef enum e_error_mode
 {
