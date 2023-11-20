@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 16:16:51 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:50:37 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char **argv)
 	input_parser(&data.input, argv[1]);
 	if (!is_valid_map(&data))
 		(clean_data(&data), error_handler(INVALID_FILE_CONTENT, CUSTOM));
+	printf("map: %s\n", data.input.map[0]);
 	if (mlx_start_program(&data))
 		(clean_data(&data), error_handler(MLX_CONTEXT, CUSTOM));
 	// printf("data no (%s)\n", data.input.north);

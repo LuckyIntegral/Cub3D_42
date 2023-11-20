@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 16:41:32 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 17:05:08 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,12 @@ typedef struct s_player
 	int			dx;
 	int			dy;
 }				t_player;
-
+typedef struct s_point
+{
+	float		x;
+	float		y;
+	int			color;
+}				t_point;
 typedef struct s_input
 {
 	char		**map;
@@ -101,12 +106,9 @@ typedef struct s_data
 	void		*west;
 	void		*east;
 	t_image		*img;
-	float		x_dir;
-	float		y_dir;
-	float		y_plane1;
-	float		x_plane1;
-	float		y_plane2;
-	float		x_plane2;
+	t_point		dir;
+	t_point		plane;
+	t_point		plane2;
 }				t_data;
 
 // mlx utils

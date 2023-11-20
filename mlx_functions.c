@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 16:40:09 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 17:06:11 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,56 +22,37 @@ void	ft_new_image(t_data *data, int width, int height)
 	data->img->bits_per_pixel /= 8;
 }
 
-void	bresenham(t_data *data, float x, float y)
+void	bresenham(t_data *data, t_point p1, t_point p2)
 {
 	float	ex;
 	float	ey;
 	float	max;
 	int		index;
 
-	ex = data->player.x - x;
-	ey = data->player.y - y;
+	ex = p2.x - p1.x;
+	ey = p2.y - p1.y;
 	max = fmax(fabs(ex), fabs(ey));
 	ey /= max;
 	ex /= max;
-	while ((int)(x - data->player.x) || (int)(y - data->player.y))
+	while ((int)(p1.x - p2.x) || (int)(p1.y - p2.y))
 	{
-		index = WIDTH * (int)y + (int)x;
-		if (y < HEIGHT && index >= 0 && y >= 0 && x >= 0
-			&& x < WIDTH)
-			data->img->pixels[index] = 0xFF2222;
-		x += ex;
-		y += ey;
-	}
-}
-void	bresenham2(t_data *data, float x, float y)
-{
-	float	ex;
-	float	ey;
-	float	max;
-	int		index;
-
-	ex = data->x_plane1 - x;
-	ey = data->y_plane1 - y;
-	max = fmax(fabs(ex), fabs(ey));
-	ey /= max;
-	ex /= max;
-	while ((int)(x - data->x_plane1) || (int)(y - data->y_plane1))
-	{
-		index = WIDTH * (int)y + (int)x;
-		if (y < HEIGHT && index >= 0 && y >= 0 && x >= 0
-			&& x < WIDTH)
-			data->img->pixels[index] = 0xFFFF22;
-		x += ex;
-		y += ey;
+		index = WIDTH * (int)p1.y + (int)p1.x;
+		if (p1.y < HEIGHT && index >= 0 && p1.y >= 0 && p1.x >= 0
+			&& p1.x < WIDTH)
+			data->img->pixels[index] = p1.color;
+		p1.x += ex;
+		p1.y += ey;
 	}
 }
 int	display_handler(t_data *data)
 {
+	t_point	p1;
+
+	p1.x = data->player.x;
+	p1.y = data->player.y;
 	ft_new_image(data, WIDTH, HEIGHT);
-	bresenham(data, data->x_dir, data->y_dir);
-	
-	bresenham2(data, data->x_plane2, data->y_plane2);
+	bresenham(data, data->dir, p1);
+	bresenham(data, data->plane, data->plane2);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
 		data->img->reference, 0, 0);
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);

@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:54:09 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 16:41:14 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 17:05:57 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 void	set_camera(t_data *data, int x, int y)
 {
-	data->x_dir = x * 64 - PLANE_L * (data->input.map[y][x] == 'W') + PLANE_L
+	data->dir.x = x * 64 - PLANE_L * (data->input.map[y][x] == 'W') + PLANE_L
 		* (data->input.map[y][x] == 'E');
-	data->y_dir = y * 64 - PLANE_L * (data->input.map[y][x] == 'N') + PLANE_L
+	data->dir.y = y * 64 - PLANE_L * (data->input.map[y][x] == 'N') + PLANE_L
 		* (data->input.map[y][x] == 'S');
-	data->x_plane1 = data->x_dir - PLANE_L * (data->input.map[y][x] == 'N')
+	data->dir.color = 0xFF0000;
+	data->plane.x = data->dir.x - PLANE_L * (data->input.map[y][x] == 'N')
 		+ PLANE_L * (data->input.map[y][x] == 'S');
-	data->y_plane1 = data->y_dir - PLANE_L * (data->input.map[y][x] == 'W')
+	data->plane.y = data->dir.y - PLANE_L * (data->input.map[y][x] == 'W')
 		+ PLANE_L * (data->input.map[y][x] == 'E');
-	data->x_plane2 = data->x_dir + PLANE_L * (data->input.map[y][x] == 'N')
+	data->plane2.x = data->dir.x + PLANE_L * (data->input.map[y][x] == 'N')
 		- PLANE_L * (data->input.map[y][x] == 'S');
-	data->y_plane2 = data->y_dir + PLANE_L * (data->input.map[y][x] == 'W')
+	data->plane2.y = data->dir.y + PLANE_L * (data->input.map[y][x] == 'W')
 		- PLANE_L * (data->input.map[y][x] == 'E');
-	printf("x_plane1: %f\n", data->x_plane1);
-	printf("y_plane1: %f\n", data->y_plane1);
-	printf("x_plane2: %f\n", data->x_plane2);
-	printf("y_plane2: %f\n", data->y_plane2);
+	data->plane.color = 0xFFFF00;
 }
 static int	find_player(t_data *data)
 {
