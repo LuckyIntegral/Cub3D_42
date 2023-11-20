@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 22:21:03 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/20 12:37:22 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	init_images(t_data *data)
 	data->west = mlx_xpm_file_to_image(data->mlx_ptr, data->input.west, &x, &y);
 	if (!data->west)
 		return (1);
-	data->south = mlx_xpm_file_to_image(data->mlx_ptr,
-		data->input.south, &x, &y);
+	data->south = mlx_xpm_file_to_image(data->mlx_ptr, data->input.south, &x,
+			&y);
 	if (!data->south)
 		return (1);
-	data->north = mlx_xpm_file_to_image(data->mlx_ptr,
-		data->input.north, &x, &y);
+	data->north = mlx_xpm_file_to_image(data->mlx_ptr, data->input.north, &x,
+			&y);
 	if (!data->north)
 		return (1);
 	return (0);
