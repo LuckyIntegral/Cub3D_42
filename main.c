@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 14:33:17 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:16:51 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int	mlx_start_program(t_data *data)
 {
 	data->img = (t_image *)malloc(sizeof(t_image));
-	
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		return (1);

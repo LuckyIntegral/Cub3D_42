@@ -6,22 +6,41 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:54:09 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 14:53:55 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:24:50 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	set_camera(t_data *data, int x, int y)
+{
+	data->x_dir = x * 64 - 100 * (data->input.map[y][x] == 'W') + 100
+		* (data->input.map[y][x] == 'E');
+	data->y_dir = y * 64 - 100 * (data->input.map[y][x] == 'N') + 100
+		* (data->input.map[y][x] == 'S');
+	data->x_plane1 = data->x_dir - 100 * (data->input.map[y][x] == 'N') + 100
+		* (data->input.map[y][x] == 'S');
+	data->y_plane1 = data->y_dir - 100 * (data->input.map[y][x] == 'W') + 100
+		* (data->input.map[y][x] == 'E');
+	data->x_plane2 = data->x_dir + 100 * (data->input.map[y][x] == 'N') - 100
+		* (data->input.map[y][x] == 'S');
+	data->y_plane2 = data->y_dir + 100 * (data->input.map[y][x] == 'W') - 100
+		* (data->input.map[y][x] == 'E');
+	printf("x_plane1: %f\n", data->x_plane1);
+	printf("y_plane1: %f\n", data->y_plane1);
+	printf("x_plane2: %f\n", data->x_plane2);
+	printf("y_plane2: %f\n", data->y_plane2);
+}
 static int	find_player(t_data *data)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
-	y = 0;
-	while (y < data->input.height)
+	y = -1;
+	while (++y < data->input.height)
 	{
-		x = 0;
-		while (x < data->input.width)
+		x = -1;
+		while (++x < data->input.width)
 		{
 			if (ft_contains("NSWE", data->input.map[y][x]))
 			{
@@ -30,12 +49,9 @@ static int	find_player(t_data *data)
 				data->player.player = data->input.map[y][x];
 				data->player.x = x * 64;
 				data->player.y = y * 64;
-				data->x_dir = x * 64 - 100;
-				data->y_dir = y * 64 - 100;
+				set_camera(data, x, y);
 			}
-			x++;
 		}
-		y++;
 	}
 	return (!data->player.player);
 }
@@ -63,8 +79,8 @@ static int	check_borders(t_input *data)
 
 static int	validate_chars(t_input *data)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < data->height)
@@ -83,8 +99,8 @@ static int	validate_chars(t_input *data)
 
 static int	check_walls(t_input *data)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
 	y = 1;
 	while (y < data->height - 1)
@@ -94,7 +110,7 @@ static int	check_walls(t_input *data)
 		{
 			if (ft_contains("NSWE0", data->map[y][x]))
 			{
-				if (data->map[y][x + 1] == ' ' || data->map[y][x -1] == ' '
+				if (data->map[y][x + 1] == ' ' || data->map[y][x - 1] == ' '
 					|| data->map[y + 1][x] == ' ' || data->map[y - 1][x] == ' ')
 					return (1);
 			}

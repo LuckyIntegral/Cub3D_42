@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 15:01:26 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:22:44 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,10 @@ typedef struct s_data
 	t_image		*img;
 	float		x_dir;
 	float		y_dir;
+	float		y_plane1;
+	float		x_plane1;
+	float		y_plane2;
+	float		x_plane2;
 }				t_data;
 
 // mlx utils

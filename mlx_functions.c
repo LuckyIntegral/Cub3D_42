@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 15:00:43 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 16:26:01 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,29 @@ void	bresenham(t_data *data, float x, float y)
 		index = WIDTH * (int)y + (int)x;
 		if (y < HEIGHT && index >= 0 && y >= 0 && x >= 0
 			&& x < WIDTH)
-			data->img->pixels[index] = 0x222222;
+			data->img->pixels[index] = 0xFF2222;
+		x += ex;
+		y += ey;
+	}
+}
+void	bresenham2(t_data *data, float x, float y)
+{
+	float	ex;
+	float	ey;
+	float	max;
+	int		index;
+
+	ex = data->x_plane1 - x;
+	ey = data->y_plane1 - y;
+	max = fmax(fabs(ex), fabs(ey));
+	ey /= max;
+	ex /= max;
+	while ((int)(x - data->x_plane1) || (int)(y - data->y_plane1))
+	{
+		index = WIDTH * (int)y + (int)x;
+		if (y < HEIGHT && index >= 0 && y >= 0 && x >= 0
+			&& x < WIDTH)
+			data->img->pixels[index] = 0xFFFF22;
 		x += ex;
 		y += ey;
 	}
@@ -48,6 +70,8 @@ int	display_handler(t_data *data)
 {
 	ft_new_image(data, WIDTH, HEIGHT);
 	bresenham(data, data->x_dir, data->y_dir);
+	
+	bresenham2(data, data->x_plane2, data->y_plane2);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
 		data->img->reference, 0, 0);
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);
