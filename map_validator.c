@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validator.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:54:09 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 22:29:21 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/20 14:53:55 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	find_player(t_data *data)
 				data->player.player = data->input.map[y][x];
 				data->player.x = x * 64;
 				data->player.y = y * 64;
+				data->x_dir = x * 64 - 100;
+				data->y_dir = y * 64 - 100;
 			}
 			x++;
 		}

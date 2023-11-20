@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 14:36:49 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 15:00:43 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,13 @@ void	ft_new_image(t_data *data, int width, int height)
 	data->img->bits_per_pixel /= 8;
 }
 
-void	bresenham(t_data *data, int x, int y)
+void	bresenham(t_data *data, float x, float y)
 {
 	float	ex;
 	float	ey;
 	float	max;
 	int		index;
 
-	printf("player position {x: %d, y: %d}\n", data->player.x, data->player.y);
-	printf("x = %d, y = %d\n", x, y);
 	ex = data->player.x - x;
 	ey = data->player.y - y;
 	max = fmax(fabs(ex), fabs(ey));
@@ -42,15 +40,14 @@ void	bresenham(t_data *data, int x, int y)
 		if (y < HEIGHT && index >= 0 && y >= 0 && x >= 0
 			&& x < WIDTH)
 			data->img->pixels[index] = 0x222222;
-		x += ex;	
+		x += ex;
 		y += ey;
 	}
-	printf("let me ozut");
 }
 int	display_handler(t_data *data)
 {
 	ft_new_image(data, WIDTH, HEIGHT);
-	bresenham(data, 100, 100);
+	bresenham(data, data->x_dir, data->y_dir);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
 		data->img->reference, 0, 0);
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);
@@ -65,12 +62,16 @@ int	key_handler(int key, t_data *data)
 		close_game(data);
 	else if (key == W || key == XK_Up)
 		go_forward(data);
-	else if (key == A || key == XK_Left)
+	else if (key == A )
 		go_left(data);
 	else if (key == S || key == XK_Down)
 		go_backward(data);
-	else if (key == D || key == XK_Right)
+	else if (key == D )
 		go_right(data);
-	printf("player position {x: %d, y: %d}\n", data->player.x, data->player.y);
+	else if ( key == XK_Left)
+		turn_left(data);
+	else if ( key == XK_Right)
+		turn_right(data);
+	printf("player position {x: %f, y: %f}\n", data->player.x, data->player.y);
 	return (0);
 }
