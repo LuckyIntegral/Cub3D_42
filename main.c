@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 22:13:12 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/20 14:33:17 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 int	mlx_start_program(t_data *data)
 {
+	data->img = (t_image *)malloc(sizeof(t_image));
+	
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		return (1);
@@ -25,8 +27,8 @@ int	mlx_start_program(t_data *data)
 		return (1);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->west, 64, 0);
 	mlx_hook(data->mlx_window, 2, 1L, &key_handler, data);
-	mlx_loop_hook(data->mlx_ptr, &display_handler, data);
 	mlx_hook(data->mlx_window, CROSS, 0L, &close_game, data);
+	mlx_loop_hook(data->mlx_ptr, &display_handler, data);
 	mlx_loop(data->mlx_ptr);
 	return (0);
 }
@@ -42,7 +44,6 @@ int	main(int argc, char **argv)
 		(clean_data(&data), error_handler(INVALID_FILE_CONTENT, CUSTOM));
 	if (mlx_start_program(&data))
 		(clean_data(&data), error_handler(MLX_CONTEXT, CUSTOM));
-
 	// printf("data no (%s)\n", data.input.north);
 	// printf("data so (%s)\n", data.input.south);
 	// printf("data we (%s)\n", data.input.west);

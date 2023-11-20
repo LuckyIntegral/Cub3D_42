@@ -4,7 +4,7 @@ SO ./textures/south.xpm
 WE ./textures/west.xpm
 
 F 1,0,1
-C 0,1,0
+C 100,100,100
 
 
       111111111

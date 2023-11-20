@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 22:20:38 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/20 14:03:02 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ typedef enum e_error_mode
 	CUSTOM
 }	t_error_mode;
 
+typedef struct s_point
+{
+	float	x;
+	float	y;
+	float	z;
+	int		color;
+}			t_point;
+
 typedef struct s_player
 {
 	char	player;
@@ -75,7 +83,17 @@ typedef struct s_input
 	int		floor;
 	int		ceiling;
 }	t_input;
+typedef struct s_image
+{
+	void	*reference;
+	int		*pixels;
+	int		width;
+	int		height;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
 
+}			t_image;
 // Maybe later i will rewrite everything into one struct, but i dont think so:)
 // Feel free rewrite it:)
 typedef struct s_data
@@ -88,6 +106,7 @@ typedef struct s_data
 	void		*south;
 	void		*west;
 	void		*east;
+	t_image		*img;
 }	t_data;
 
 // mlx utils
