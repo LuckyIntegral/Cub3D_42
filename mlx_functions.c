@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 14:27:37 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 14:36:34 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	bresenham(t_data *data, int x, int y)
 	float	max;
 	int		index;
 
+	printf("player position {x: %d, y: %d}\n", data->player.x, data->player.y);
+	printf("x = %d, y = %d\n", x, y);
 	ex = data->player.x - x;
 	ey = data->player.y - y;
 	max = fmax(fabs(ex), fabs(ey));
