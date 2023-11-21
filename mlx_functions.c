@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 17:54:18 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/21 20:03:45 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,18 @@ void	ft_new_image(t_data *data, int width, int height)
 			&data->img->bits_per_pixel, &data->img->line_size,
 			&data->img->endian);
 	data->img->bits_per_pixel /= 8;
+}
+void	draw_view(t_data *data, float dist, int color)
+{
+	const int	y = 700 - 1/dist * 500;
+	int			i;
+	
+	i  = 100 + 1/dist * 500;
+	while (i < y)
+	{
+		data->img->pixels[WIDTH * i + 700 + data->ray_num] = color;
+		i++;
+	}
 }
 
 void	bresenham(t_data *data, t_point p1, t_point p2, float length)
@@ -43,10 +55,12 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 		if (p1.y < HEIGHT && index >= 0 && p1.y >= 0 && p1.x >= 0
 			&& p1.x < WIDTH)
 			data->img->pixels[index] = p1.color;
-		if (data->input.map[(int)p1.y / IMAGE_SIZE][(int)p1.x
-			/ IMAGE_SIZE] == '1')
+		if (IMAGE_SIZE * data->input.width > p1.x && IMAGE_SIZE
+			* data->input.height > p1.y && data->input.map[(int)p1.y
+			/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == '1')
 		{
-			printf("l %f\n", sqrt(pow(p1.y - p2.y, 2) + pow(p1.x - p2.x, 2)));
+			draw_view(data, sqrt(pow(p1.y - p2.y, 2) + pow(p1.x - p2.x, 2)),
+				0xAA0000);
 			break ;
 		}
 		p1.x += ex;
@@ -58,9 +72,8 @@ void	do_rays(t_data *data, t_point dir, float length)
 	t_point	p;
 	float	del_x;
 	float	del_y;
-	int		i;
 
-	i = -1;
+	data->ray_num = -1;
 	p.x = data->player.x;
 	p.y = data->player.y;
 	p.color = 0x5500FF00;
@@ -68,16 +81,15 @@ void	do_rays(t_data *data, t_point dir, float length)
 	del_y = (dir.y - data->player.y);
 	dir.x = (del_x * cos(-0.78) - del_y * sin(-0.78)) + data->player.x;
 	dir.y = (del_x * sin(-0.78) + del_y * cos(-0.78)) + data->player.y;
-	while (++i < WIDTH)
+	while (++data->ray_num < 700)
 	{
 		bresenham(data, p, dir, length);
 		del_x = (dir.x - data->player.x);
 		del_y = (dir.y - data->player.y);
-		dir.x = (del_x * cos(3.14159 / WIDTH) - del_y * sin(3.14159 / WIDTH))
+		dir.x = (del_x * cos(1.5708 / 700) - del_y * sin(1.5708 / 700))
 			+ data->player.x;
-		dir.y = (del_x * sin(3.14159 / WIDTH) + del_y * cos(3.14159/ WIDTH))
+		dir.y = (del_x * sin(1.5708 / 700) + del_y * cos(1.5708 / 700))
 			+ data->player.y;
-		i++;
 	}
 }
 void	draw_cell(t_data *data, int x, int y, int color)
@@ -85,8 +97,6 @@ void	draw_cell(t_data *data, int x, int y, int color)
 	const int	x1 = x + IMAGE_SIZE;
 	const int	y1 = y + IMAGE_SIZE;
 
-	printf("x: %d, y: %d, x1: %d, y1: %d\n", x, y, x1, y1);
-	printf("color: %d\n", color);
 	while (x < x1)
 	{
 		y = y1 - IMAGE_SIZE;
@@ -110,8 +120,6 @@ int	display_handler(t_data *data)
 	{
 		for (int x = 0; x < data->input.width; x++)
 		{
-			printf("x: %d, y: %d\n", x, y);
-			printf("data->input.map[y][x]: %c\n", data->input.map[y][x]);
 			if (data->input.map[y][x] == '0')
 				draw_cell(data, x * IMAGE_SIZE, y * IMAGE_SIZE, 0x550000);
 			else if (data->input.map[y][x] == '1')
@@ -145,6 +153,5 @@ int	key_handler(int key, t_data *data)
 		turn_left(data);
 	else if (key == XK_Right)
 		turn_right(data);
-	printf("player position {x: %f, y: %f}\n", data->player.x, data->player.y);
 	return (0);
 }

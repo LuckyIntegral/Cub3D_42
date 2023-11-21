@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 17:31:11 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/21 19:04:01 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,12 @@ typedef struct s_data
 	t_point		dir;
 	t_point		plane;
 	t_point		plane2;
+	int 		ray_num;
 }				t_data;
 
 // mlx utils
 int				key_handler(int key, t_data *data);
-
+void	bresenham(t_data *data, t_point p1, t_point p2, float length);
 // rotation v1
 void			go_right(t_data *data);
 void			go_left(t_data *data);
