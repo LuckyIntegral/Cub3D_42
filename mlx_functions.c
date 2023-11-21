@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 20:03:45 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/21 21:17:33 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <math.h>
-#include <mlx.h>
 
 void	ft_new_image(t_data *data, int width, int height)
 {
@@ -24,10 +22,10 @@ void	ft_new_image(t_data *data, int width, int height)
 }
 void	draw_view(t_data *data, float dist, int color)
 {
-	const int	y = 700 - 1/dist * 500;
+	const int	y = HEIGHT - 200 + dist;//700 - 1/dist * 500;
 	int			i;
-	
-	i  = 100 + 1/dist * 500;
+
+	i  = 200 - dist;//100 + 1/dist * 500;
 	while (i < y)
 	{
 		data->img->pixels[WIDTH * i + 700 + data->ray_num] = color;
@@ -60,7 +58,7 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 			/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == '1')
 		{
 			draw_view(data, sqrt(pow(p1.y - p2.y, 2) + pow(p1.x - p2.x, 2)),
-				0xAA0000);
+				data->input.ceiling);
 			break ;
 		}
 		p1.x += ex;

@@ -1,10 +1,10 @@
 EA ./textures/east.xpm
-NO ./textures/test.xpm
-SO ./textures/empty.xpm
-WE ./textures/wall.xpm
+NO ./textures/north.xpm
+SO ./textures/south.xpm
+WE ./textures/west.xpm
 
-F 1,0,1
-C 100,100,100
+F 255,0,1
+C 0,100,100
 
 
       111111111
