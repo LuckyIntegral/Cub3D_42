@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validator.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:54:09 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 01:15:02 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/21 15:51:00 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static int	find_player(t_data *data)
 				if (data->player.player)
 					return (1);
 				data->player.player = data->input.map[y][x];
-				data->player.x = x * IMAGE_SIZE + (IMAGE_SIZE / 2.0f);
-				data->player.y = y * IMAGE_SIZE + (IMAGE_SIZE / 2.0f);
+				data->player.x = x * IMAGE_SIZE ;
+				data->player.y = y * IMAGE_SIZE ;
 				set_camera(data, x, y);
 				data->input.map[y][x] = '0';
 			}

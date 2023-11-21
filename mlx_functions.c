@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 01:17:47 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/21 16:35:55 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 #include <mlx.h>
 
 void	ft_new_image(t_data *data, int width, int height)
@@ -35,24 +36,29 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 	ey /= max;
 	ex /= max;
 	p2.x += ex * length;
-    p2.y += ey * length;
+	p2.y += ey * length;
 	while ((int)(p1.x - p2.x) || (int)(p1.y - p2.y))
 	{
 		index = WIDTH * (int)p1.y + (int)p1.x;
 		if (p1.y < HEIGHT && index >= 0 && p1.y >= 0 && p1.x >= 0
 			&& p1.x < WIDTH)
 			data->img->pixels[index] = p1.color;
+		if (data->input.map[(int)p1.y / IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == '1')
+		{
+			printf("l %f\n", sqrt(pow(p1.y - p2.y, 2) + pow(p1.x - p2.x, 2)));
+			break ;	
+		}
 		p1.x += ex;
 		p1.y += ey;
 	}
 }
-void do_rays(t_data *data, t_point p1, t_point p2, float length)
+void	do_rays(t_data *data, t_point p1, t_point p2, float length)
 {
 	float	ex;
 	float	ey;
 	float	max;
 	int		index;
-	t_point p;
+	t_point	p;
 
 	ex = p2.x - p1.x;
 	ey = p2.y - p1.y;
@@ -74,7 +80,24 @@ void do_rays(t_data *data, t_point p1, t_point p2, float length)
 		p1.y += ey;
 	}
 }
+void	draw_cell(t_data *data, int x, int y, int color)
+{
+	const int	x1 = x + IMAGE_SIZE;
+	const int	y1 = y + IMAGE_SIZE;
 
+	printf("x: %d, y: %d, x1: %d, y1: %d\n", x, y, x1, y1);
+	printf("color: %d\n", color);
+	while (x < x1)
+	{
+		y = y1 - IMAGE_SIZE;
+		while (y < y1)
+		{
+			data->img->pixels[WIDTH * (int)y + (int)x] = color;
+			y++;
+		}
+		x++;
+	}
+}
 int	display_handler(t_data *data)
 {
 	t_point	p1;
@@ -83,35 +106,26 @@ int	display_handler(t_data *data)
 	p1.y = data->player.y;
 	p1.color = 0x0000FF;
 	ft_new_image(data, WIDTH, HEIGHT);
-	do_rays(data, data->plane2 , data->plane, 400);
-	bresenham(data, data->dir, p1,1);
-	bresenham(data, data->plane, data->plane2,1);
-	bresenham(data, p1, data->plane2,400);
-	bresenham(data, p1, data->plane,400);
+	for (int y = 0; y < data->input.height; y++)
+	{
+		for (int x = 0; x < data->input.width; x++)
+		{
+			printf("x: %d, y: %d\n", x, y);
+			printf("data->input.map[y][x]: %c\n", data->input.map[y][x]);
+			if (data->input.map[y][x] == '0')
+				draw_cell(data, x * IMAGE_SIZE, y * IMAGE_SIZE, 0x550000);
+			else if (data->input.map[y][x] == '1')
+				draw_cell(data, x * IMAGE_SIZE, y * IMAGE_SIZE, 0xFFFFFF);
+		}
+	}
+	do_rays(data, data->plane2, data->plane, 400);
+	/* bresenham(data, data->dir, p1, 1);
+	bresenham(data, data->plane, data->plane2, 1);
+	bresenham(data, p1, data->plane2, 400);
+	bresenham(data, p1, data->plane, 400); */
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
 		data->img->reference, 0, 0);
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);
-
-	// just for tests
-	for (int y = 0; y < data->input.height; y++) {
-		for (int x = 0; x < data->input.width; x++) {
-			switch (data->input.map[y][x]) {
-				case (' '):
-					break ;
-				case ('1'):
-					mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->west, x * IMAGE_SIZE, y * IMAGE_SIZE);
-					break ;
-				case ('0'):
-					mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->south, x * IMAGE_SIZE, y * IMAGE_SIZE);
-				default:
-					mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->south, x * IMAGE_SIZE, y * IMAGE_SIZE);
-					break ;
-			}
-		}
-	}
-
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->north,
-		data->player.x - (IMAGE_SIZE / 2.0f), data->player.y - (IMAGE_SIZE / 2.0f));
 	return (0);
 }
 
@@ -119,17 +133,17 @@ int	key_handler(int key, t_data *data)
 {
 	if (key == ESC)
 		close_game(data);
-	else if (key == W )
+	else if (key == W)
 		go_forward(data);
-	else if (key == A )
+	else if (key == A)
 		go_left(data);
-	else if (key == S )
+	else if (key == S)
 		go_backward(data);
-	else if (key == D )
+	else if (key == D)
 		go_right(data);
-	else if ( key == XK_Left)
+	else if (key == XK_Left)
 		turn_left(data);
-	else if ( key == XK_Right)
+	else if (key == XK_Right)
 		turn_right(data);
 	printf("player position {x: %f, y: %f}\n", data->player.x, data->player.y);
 	return (0);

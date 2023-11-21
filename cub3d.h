@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 00:50:55 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/21 16:38:01 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@
 # define IMAGE_SIZE 32
 # define SPEED 10
 # define ROTATE_SPEED 0.1
-# define PLANE_L 20
-# define DIR_L 30
+# define PLANE_L 90
+# define DIR_L 20
 
 typedef enum e_error_mode
 {
