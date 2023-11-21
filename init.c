@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 12:37:22 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/20 22:26:29 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	init_images(t_data *data)
 
 void	init_structure(t_data *data)
 {
+	data->img = NULL;
 	data->mlx_ptr = NULL;
 	data->mlx_window = NULL;
 	data->east = NULL;
@@ -56,6 +57,4 @@ void	init_structure(t_data *data)
 	data->player.player = 0;
 	data->player.x = 0;
 	data->player.y = 0;
-	data->player.dx = 0;
-	data->player.dy = 0;
 }

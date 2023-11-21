@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 17:41:01 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/21 01:17:47 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,27 @@ int	display_handler(t_data *data)
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
 		data->img->reference, 0, 0);
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);
+
+	// just for tests
+	for (int y = 0; y < data->input.height; y++) {
+		for (int x = 0; x < data->input.width; x++) {
+			switch (data->input.map[y][x]) {
+				case (' '):
+					break ;
+				case ('1'):
+					mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->west, x * IMAGE_SIZE, y * IMAGE_SIZE);
+					break ;
+				case ('0'):
+					mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->south, x * IMAGE_SIZE, y * IMAGE_SIZE);
+				default:
+					mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->south, x * IMAGE_SIZE, y * IMAGE_SIZE);
+					break ;
+			}
+		}
+	}
+
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->north,
-		data->player.x, data->player.y);
+		data->player.x - (IMAGE_SIZE / 2.0f), data->player.y - (IMAGE_SIZE / 2.0f));
 	return (0);
 }
 

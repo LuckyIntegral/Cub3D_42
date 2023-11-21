@@ -1,7 +1,7 @@
 EA ./textures/east.xpm
 NO ./textures/test.xpm
-SO ./textures/south.xpm
-WE ./textures/west.xpm
+SO ./textures/empty.xpm
+WE ./textures/wall.xpm
 
 F 1,0,1
 C 100,100,100

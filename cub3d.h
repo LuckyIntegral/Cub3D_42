@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 17:05:08 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/21 00:50:55 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@
 
 // random
 # define CROSS 17
+# define IMAGE_SIZE 32
 # define SPEED 10
 # define ROTATE_SPEED 0.1
-# define PLANE_L 50
+# define PLANE_L 20
+# define DIR_L 30
 
 typedef enum e_error_mode
 {
@@ -61,15 +63,16 @@ typedef struct s_player
 	char		player;
 	float		x;
 	float		y;
-	int			dx;
-	int			dy;
+	float		angle; // in radians, for later:)
 }				t_player;
+
 typedef struct s_point
 {
 	float		x;
 	float		y;
 	int			color;
 }				t_point;
+
 typedef struct s_input
 {
 	char		**map;
@@ -82,6 +85,7 @@ typedef struct s_input
 	int			floor;
 	int			ceiling;
 }				t_input;
+
 typedef struct s_image
 {
 	void		*reference;
@@ -91,8 +95,8 @@ typedef struct s_image
 	int			bits_per_pixel;
 	int			line_size;
 	int			endian;
-
 }				t_image;
+
 // Maybe later i will rewrite everything into one struct, but i dont think so:)
 // Feel free rewrite it:)
 typedef struct s_data

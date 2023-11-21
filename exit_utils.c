@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:08:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 20:59:51 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/21 00:07:35 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	error_handler(char *str, int mode)
 	exit(1);
 }
 
-// for everything
 void	clean_data(t_data *data)
 {
 	if (data->east)
@@ -45,6 +44,8 @@ void	clean_data(t_data *data)
 		mlx_destroy_window(data->mlx_ptr, data->mlx_window);
 	if (data->mlx_ptr)
 		(mlx_destroy_display(data->mlx_ptr), free(data->mlx_ptr));
+	if (data->img)
+		free(data->img);
 	clean_input_structure(&data->input);
 }
 

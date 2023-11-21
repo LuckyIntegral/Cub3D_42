@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validator.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:54:09 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/20 17:05:57 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/21 01:15:02 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	set_camera(t_data *data, int x, int y)
 {
-	data->dir.x = x * 64 - PLANE_L * (data->input.map[y][x] == 'W') + PLANE_L
+	data->dir.x = x * IMAGE_SIZE - DIR_L * (data->input.map[y][x] == 'W') + DIR_L
 		* (data->input.map[y][x] == 'E');
-	data->dir.y = y * 64 - PLANE_L * (data->input.map[y][x] == 'N') + PLANE_L
+	data->dir.y = y * IMAGE_SIZE - DIR_L * (data->input.map[y][x] == 'N') + DIR_L
 		* (data->input.map[y][x] == 'S');
 	data->dir.color = 0xFF0000;
 	data->plane.x = data->dir.x - PLANE_L * (data->input.map[y][x] == 'N')
@@ -45,9 +45,10 @@ static int	find_player(t_data *data)
 				if (data->player.player)
 					return (1);
 				data->player.player = data->input.map[y][x];
-				data->player.x = x * 64;
-				data->player.y = y * 64;
+				data->player.x = x * IMAGE_SIZE + (IMAGE_SIZE / 2.0f);
+				data->player.y = y * IMAGE_SIZE + (IMAGE_SIZE / 2.0f);
 				set_camera(data, x, y);
+				data->input.map[y][x] = '0';
 			}
 		}
 	}
