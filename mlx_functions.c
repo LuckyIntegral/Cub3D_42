@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 16:35:55 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/21 17:45:09 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,41 +43,41 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 		if (p1.y < HEIGHT && index >= 0 && p1.y >= 0 && p1.x >= 0
 			&& p1.x < WIDTH)
 			data->img->pixels[index] = p1.color;
-		if (data->input.map[(int)p1.y / IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == '1')
+		if (data->input.map[(int)p1.y / IMAGE_SIZE][(int)p1.x
+			/ IMAGE_SIZE] == '1')
 		{
 			printf("l %f\n", sqrt(pow(p1.y - p2.y, 2) + pow(p1.x - p2.x, 2)));
-			break ;	
+			break ;
 		}
 		p1.x += ex;
 		p1.y += ey;
 	}
 }
-void	do_rays(t_data *data, t_point p1, t_point p2, float length)
+void	do_rays(t_data *data, t_point dir, float length)
 {
-	float	ex;
-	float	ey;
-	float	max;
-	int		index;
 	t_point	p;
+	float	del_x;
+	float	del_y;
+	int		i;
 
-	ex = p2.x - p1.x;
-	ey = p2.y - p1.y;
-	max = fmax(fabs(ex), fabs(ey));
-	ey /= max;
-	ex /= max;
-	while ((int)(p1.x - p2.x) || (int)(p1.y - p2.y))
+	i = -1;
+	p.x = data->player.x;
+	p.y = data->player.y;
+	p.color = 0x5500FF00;
+	del_x = (dir.x - data->player.x);
+	del_y = (dir.y - data->player.y);
+	dir.x = (del_x * cos(-0.78) - del_y * sin(-0.78)) + data->player.x;
+	dir.y = (del_x * sin(-0.78) + del_y * cos(-0.78)) + data->player.y;
+	while (++i < WIDTH)
 	{
-		index = WIDTH * (int)p1.y + (int)p1.x;
-		if (p1.y < HEIGHT && index >= 0 && p1.y >= 0 && p1.x >= 0
-			&& p1.x < WIDTH)
-		{
-			p.x = data->player.x;
-			p.y = data->player.y;
-			p.color = 0x5500FF00;
-			bresenham(data, p, p1, length);
-		}
-		p1.x += ex;
-		p1.y += ey;
+		bresenham(data, p, dir, length);
+		del_x = (dir.x - data->player.x);
+		del_y = (dir.y - data->player.y);
+		dir.x = (del_x * cos(1.5708 / WIDTH) - del_y * sin(1.5708 / WIDTH))
+			+ data->player.x;
+		dir.y = (del_x * sin(1.5708 / WIDTH) + del_y * cos(1.5708 / WIDTH))
+			+ data->player.y;
+		i++;
 	}
 }
 void	draw_cell(t_data *data, int x, int y, int color)
@@ -118,7 +118,7 @@ int	display_handler(t_data *data)
 				draw_cell(data, x * IMAGE_SIZE, y * IMAGE_SIZE, 0xFFFFFF);
 		}
 	}
-	do_rays(data, data->plane2, data->plane, 400);
+	do_rays(data, data->dir, 400);
 	/* bresenham(data, data->dir, p1, 1);
 	bresenham(data, data->plane, data->plane2, 1);
 	bresenham(data, p1, data->plane2, 400);

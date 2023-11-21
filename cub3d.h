@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 16:38:01 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/21 17:31:11 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define SPEED 10
 # define ROTATE_SPEED 0.1
 # define PLANE_L 90
-# define DIR_L 20
+# define DIR_L 200
 
 typedef enum e_error_mode
 {
