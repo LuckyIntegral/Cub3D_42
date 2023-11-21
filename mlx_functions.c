@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 17:45:09 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/21 17:54:18 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	do_rays(t_data *data, t_point dir, float length)
 		bresenham(data, p, dir, length);
 		del_x = (dir.x - data->player.x);
 		del_y = (dir.y - data->player.y);
-		dir.x = (del_x * cos(1.5708 / WIDTH) - del_y * sin(1.5708 / WIDTH))
+		dir.x = (del_x * cos(3.14159 / WIDTH) - del_y * sin(3.14159 / WIDTH))
 			+ data->player.x;
-		dir.y = (del_x * sin(1.5708 / WIDTH) + del_y * cos(1.5708 / WIDTH))
+		dir.y = (del_x * sin(3.14159 / WIDTH) + del_y * cos(3.14159/ WIDTH))
 			+ data->player.y;
 		i++;
 	}
@@ -118,7 +118,7 @@ int	display_handler(t_data *data)
 				draw_cell(data, x * IMAGE_SIZE, y * IMAGE_SIZE, 0xFFFFFF);
 		}
 	}
-	do_rays(data, data->dir, 400);
+	do_rays(data, data->dir, 1);
 	/* bresenham(data, data->dir, p1, 1);
 	bresenham(data, data->plane, data->plane2, 1);
 	bresenham(data, p1, data->plane2, 400);
