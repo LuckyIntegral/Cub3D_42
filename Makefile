@@ -2,7 +2,7 @@ NAME	= cub3D
 CC		= cc
 RM		= rm -rf
 CFLAGS	= -Wall -Wextra -Werror -g -MD -MP
-LINKS	= -lmlx -lXext -lX11 -lm
+LINKS	= -L. -lmlx -lXext -lX11 -lm
 
 LIBDIR	= ./libft
 LIBFT	= ${LIBDIR}/libft.a
@@ -18,7 +18,7 @@ all		: $(NAME)
 
 $(NAME)	: ${OBJS}
 		make --no-print-directory -C ${LIBDIR} all
-		$(CC) $(CFLAGS) $(LINKS) -o $@ $^ -L. ${LIBFT}
+		$(CC) $(CFLAGS) -o $@ $^ $(LINKS) -L. ${LIBFT}
 
 objs/%.o	: %.c
 		@mkdir -p $(dir $@)

@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 21:17:33 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/22 23:21:26 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,11 @@ void	draw_cell(t_data *data, int x, int y, int color)
 }
 int	display_handler(t_data *data)
 {
-	t_point	p1;
+	// t_point	p1;
 
-	p1.x = data->player.x;
-	p1.y = data->player.y;
-	p1.color = 0x0000FF;
+	// p1.x = data->player.x;
+	// p1.y = data->player.y;
+	// p1.color = 0x0000FF;
 	ft_new_image(data, WIDTH, HEIGHT);
 	for (int y = 0; y < data->input.height; y++)
 	{
