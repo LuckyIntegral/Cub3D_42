@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 19:04:01 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/23 09:50:06 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 // screen size
 # define WIDTH 1536
-# define HEIGHT 767
+# define HEIGHT 800
 
 // keys
 # define ESC 65307
@@ -50,7 +50,7 @@
 # define SPEED 10
 # define ROTATE_SPEED 0.1
 # define PLANE_L 90
-# define DIR_L 200
+# define DIR_L 400
 
 typedef enum e_error_mode
 {

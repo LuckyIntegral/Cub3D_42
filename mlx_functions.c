@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/22 23:21:26 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/23 09:57:12 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	ft_new_image(t_data *data, int width, int height)
 }
 void	draw_view(t_data *data, float dist, int color)
 {
-	const int	y = HEIGHT - 200 + dist;//700 - 1/dist * 500;
+	const int	y = HEIGHT - DIR_L + pow(dist, 2) / DIR_L;
+	// const int	y = 700 - 1/dist * 500;
 	int			i;
 
-	i  = 200 - dist;//100 + 1/dist * 500;
+	i  = HEIGHT - y;//100 + 1/dist * 500;
 	while (i < y)
 	{
 		data->img->pixels[WIDTH * i + 700 + data->ray_num] = color;
