@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/23 09:57:12 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:38:55 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 
 void	ft_new_image(t_data *data, int width, int height)
 {
@@ -22,11 +23,15 @@ void	ft_new_image(t_data *data, int width, int height)
 }
 void	draw_view(t_data *data, float dist, int color)
 {
-	const int	y = HEIGHT - DIR_L + pow(dist, 2) / DIR_L;
-	// const int	y = 700 - 1/dist * 500;
-	int			i;
+	int	x;
+	int	y;
+	int	i;
 
-	i  = HEIGHT - y;//100 + 1/dist * 500;
+	x = (int)(32 * 400 / dist);
+	if (x > 300)
+		x = 300;
+	y = 400 + x;
+	i = 400 - x;
 	while (i < y)
 	{
 		data->img->pixels[WIDTH * i + 700 + data->ray_num] = color;
@@ -51,15 +56,16 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 	while ((int)(p1.x - p2.x) || (int)(p1.y - p2.y))
 	{
 		index = WIDTH * (int)p1.y + (int)p1.x;
-		if (p1.y < HEIGHT && index >= 0 && p1.y >= 0 && p1.x >= 0
-			&& p1.x < WIDTH)
-			data->img->pixels[index] = p1.color;
+		if (data->ray_num % 1 == 0)
+			if (p1.y < HEIGHT && index >= 0 && p1.y >= 0 && p1.x >= 0
+				&& p1.x < WIDTH)
+					data->img->pixels[index] += 0x00A500;
 		if (IMAGE_SIZE * data->input.width > p1.x && IMAGE_SIZE
 			* data->input.height > p1.y && data->input.map[(int)p1.y
 			/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == '1')
 		{
-			draw_view(data, sqrt(pow(p1.y - p2.y, 2) + pow(p1.x - p2.x, 2)),
-				data->input.ceiling);
+			draw_view(data, sqrt(pow(data->player.y - p1.y, 2)
+					+ pow(data->player.x - p1.x, 2))* cos(fabs(data->ray_angle)), data->input.ceiling);
 			break ;
 		}
 		p1.x += ex;
@@ -78,17 +84,19 @@ void	do_rays(t_data *data, t_point dir, float length)
 	p.color = 0x5500FF00;
 	del_x = (dir.x - data->player.x);
 	del_y = (dir.y - data->player.y);
-	dir.x = (del_x * cos(-0.78) - del_y * sin(-0.78)) + data->player.x;
-	dir.y = (del_x * sin(-0.78) + del_y * cos(-0.78)) + data->player.y;
+	dir.x = (del_x * cos(-FOV/2) - del_y * sin(-FOV/2)) + data->player.x;
+	dir.y = (del_x * sin(-FOV/2) + del_y * cos(-FOV/2)) + data->player.y;
+	data->ray_angle = -FOV/2;
 	while (++data->ray_num < 700)
 	{
 		bresenham(data, p, dir, length);
 		del_x = (dir.x - data->player.x);
 		del_y = (dir.y - data->player.y);
-		dir.x = (del_x * cos(1.5708 / 700) - del_y * sin(1.5708 / 700))
+		dir.x = (del_x * cos(FOV / 700) - del_y * sin(FOV / 700))
 			+ data->player.x;
-		dir.y = (del_x * sin(1.5708 / 700) + del_y * cos(1.5708 / 700))
+		dir.y = (del_x * sin(FOV / 700) + del_y * cos(FOV / 700))
 			+ data->player.y;
+		data->ray_angle += FOV / 700;
 	}
 }
 void	draw_cell(t_data *data, int x, int y, int color)
@@ -110,7 +118,6 @@ void	draw_cell(t_data *data, int x, int y, int color)
 int	display_handler(t_data *data)
 {
 	// t_point	p1;
-
 	// p1.x = data->player.x;
 	// p1.y = data->player.y;
 	// p1.color = 0x0000FF;

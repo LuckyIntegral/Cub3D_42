@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/23 09:50:06 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/24 14:26:58 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@
 // random
 # define CROSS 17
 # define IMAGE_SIZE 32
-# define SPEED 10
+# define SPEED 7
 # define ROTATE_SPEED 0.1
 # define PLANE_L 90
 # define DIR_L 400
+# define FOV 1.0472
 
 typedef enum e_error_mode
 {
@@ -63,7 +64,7 @@ typedef struct s_player
 	char		player;
 	float		x;
 	float		y;
-	float		angle; // in radians, for later:)
+	float angle; // in radians, for later:)
 }				t_player;
 
 typedef struct s_point
@@ -113,12 +114,13 @@ typedef struct s_data
 	t_point		dir;
 	t_point		plane;
 	t_point		plane2;
-	int 		ray_num;
+	int			ray_num;
+	float		ray_angle;
 }				t_data;
 
 // mlx utils
 int				key_handler(int key, t_data *data);
-void	bresenham(t_data *data, t_point p1, t_point p2, float length);
+void			bresenham(t_data *data, t_point p1, t_point p2, float length);
 // rotation v1
 void			go_right(t_data *data);
 void			go_left(t_data *data);
