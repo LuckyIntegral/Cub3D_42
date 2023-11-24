@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/24 16:16:21 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/24 17:46:05 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_new_image(t_data *data, int width, int height)
 			&data->img->endian);
 	data->img->bits_per_pixel /= 8;
 }
-void	draw_view(t_data *data, float dist, int color)
+void	draw_view(t_data *data, float dist, t_point p)
 {
 	int	x;
 	int	y;
@@ -37,9 +37,10 @@ void	draw_view(t_data *data, float dist, int color)
 	i = 400 - x;
 	while (i < y)
 	{
-		data->img->pixels[WIDTH * i + 700 + data->ray_num] = color;
+		data->img->pixels[WIDTH * i + 700 + data->ray_num] = data->east_img->pixels[32 * (i - (400 - x)) + ((int)p.x % 32)];
 		i++;
 	}
+	
 }
 
 void	bresenham(t_data *data, t_point p1, t_point p2, float length)
@@ -68,7 +69,7 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 			/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == '1')
 		{
 			draw_view(data, sqrt(pow(data->player.y - p1.y, 2)
-					+ pow(data->player.x - p1.x, 2))* cos(fabs(data->ray_angle)), 0x555500);
+					+ pow(data->player.x - p1.x, 2))* cos(fabs(data->ray_angle)), p1);
 			break ;
 		}
 		p1.x += ex;
@@ -167,7 +168,8 @@ int	display_handler(t_data *data)
 	do_rays(data, data->dir, 1);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
 		data->img->reference, 0, 10);
-	
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
+		data->east_img->reference, 0, 10);
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);
 	end_time = clock();
 	double frame_time = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;

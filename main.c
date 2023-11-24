@@ -6,18 +6,20 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/24 15:58:44 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/24 17:19:13 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <mlx.h>
-#include <time.h>
 
 int	mlx_start_program(t_data *data)
 {
 	data->img = (t_image *)malloc(sizeof(t_image));
 	if (!data->img)
+		return (1);
+	data->east_img = (t_image *)malloc(sizeof(t_image));
+	if (!data->east_img)
 		return (1);
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)

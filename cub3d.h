@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/24 16:21:22 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/24 17:14:42 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct s_data
 	void		*west;
 	void		*east;
 	t_image		*img;
+	t_image		*east_img;
 	t_point		dir;
 	t_point		plane;
 	t_point		plane2;
