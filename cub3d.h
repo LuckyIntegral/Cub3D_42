@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/24 14:26:58 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/24 16:21:22 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@
 // random
 # define CROSS 17
 # define IMAGE_SIZE 32
-# define SPEED 7
-# define ROTATE_SPEED 0.1
+# define SPEED 10
+# define ROTATE_SPEED 0.174533
 # define PLANE_L 90
-# define DIR_L 400
+# define DIR_L 100
 # define FOV 1.0472
 
 typedef enum e_error_mode
@@ -116,6 +116,9 @@ typedef struct s_data
 	t_point		plane2;
 	int			ray_num;
 	float		ray_angle;
+	double total_time;
+	int frame_count;
+	int fps;
 }				t_data;
 
 // mlx utils

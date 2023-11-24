@@ -6,12 +6,15 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/24 14:38:55 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/24 16:16:21 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "libft/libft.h"
 #include <math.h>
+#include <mlx.h>
+#include <time.h>
 
 void	ft_new_image(t_data *data, int width, int height)
 {
@@ -53,7 +56,7 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 	ex /= max;
 	p2.x += ex * length;
 	p2.y += ey * length;
-	while ((int)(p1.x - p2.x) || (int)(p1.y - p2.y))
+	while (1)
 	{
 		index = WIDTH * (int)p1.y + (int)p1.x;
 		if (data->ray_num % 1 == 0)
@@ -65,7 +68,7 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 			/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == '1')
 		{
 			draw_view(data, sqrt(pow(data->player.y - p1.y, 2)
-					+ pow(data->player.x - p1.x, 2))* cos(fabs(data->ray_angle)), data->input.ceiling);
+					+ pow(data->player.x - p1.x, 2))* cos(fabs(data->ray_angle)), 0x555500);
 			break ;
 		}
 		p1.x += ex;
@@ -115,13 +118,42 @@ void	draw_cell(t_data *data, int x, int y, int color)
 		x++;
 	}
 }
+void draw_background(t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = 700;
+	while (x < 1400)
+	{
+		y = 100;
+		while (y < HEIGHT / 2)
+		{
+			data->img->pixels[WIDTH * y + x] = data->input.ceiling;
+			y++;
+		}
+		x++;
+	}
+	x = 700;
+	while (x < 1400)
+	{
+		y = HEIGHT / 2;
+		while (y < HEIGHT - 100)
+		{
+			data->img->pixels[WIDTH * y + x] = data->input.floor;
+			y++;
+		}
+		x++;
+	}	
+}
+
 int	display_handler(t_data *data)
 {
-	// t_point	p1;
-	// p1.x = data->player.x;
-	// p1.y = data->player.y;
-	// p1.color = 0x0000FF;
+	clock_t start_time, end_time;
+	start_time = clock();
+	
 	ft_new_image(data, WIDTH, HEIGHT);
+	draw_background(data);
 	for (int y = 0; y < data->input.height; y++)
 	{
 		for (int x = 0; x < data->input.width; x++)
@@ -133,13 +165,27 @@ int	display_handler(t_data *data)
 		}
 	}
 	do_rays(data, data->dir, 1);
-	/* bresenham(data, data->dir, p1, 1);
-	bresenham(data, data->plane, data->plane2, 1);
-	bresenham(data, p1, data->plane2, 400);
-	bresenham(data, p1, data->plane, 400); */
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
-		data->img->reference, 0, 0);
+		data->img->reference, 0, 10);
+	
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);
+	end_time = clock();
+	double frame_time = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
+	data->total_time += frame_time;
+	data->frame_count++;
+	data->fps = data->frame_count / data->total_time;
+	if (data->total_time > 0.5)
+	{
+		for (int x = 0; x < 20; x++)
+			for (int y = 0; y < 10; y++)
+				mlx_pixel_put(data->mlx_ptr, data->mlx_window, x, y, 0x000000);
+		mlx_string_put(data->mlx_ptr, data->mlx_window, 1, 10, 0x00FF00, ft_itoa(data->fps));
+		data->frame_count = 0;
+		data->total_time = 0.0;
+		
+	}
+	
+		
 	return (0);
 }
 
