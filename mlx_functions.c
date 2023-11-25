@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 14:43:21 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 15:03:42 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	draw_view(t_data *data, float dist, t_point p)
 	while (i < y)
 	{
 		if (!(data->input.map[(int)p.y / IMAGE_SIZE][(int)p.x / IMAGE_SIZE] == ' '))
-			data->img->pixels[WIDTH * i + 700 + data->ray_num] = data->east_img->pixels[32 * (i - (400 - x)) + ((int)p.x % 32)];
+			data->img->pixels[WIDTH * i + data->ray_num] = data->east_img->pixels[32 * (i - (400 - x)) + ((int)p.x % 32)];
 		i++;
 	}
 	
@@ -95,16 +95,16 @@ void	do_rays(t_data *data, t_point dir, float length)
 	dir.x = (del_x * cos(-FOV/2) - del_y * sin(-FOV/2)) + data->player.x;
 	dir.y = (del_x * sin(-FOV/2) + del_y * cos(-FOV/2)) + data->player.y;
 	data->ray_angle = -FOV/2;
-	while (++data->ray_num < 700)
+	while (++data->ray_num < WIDTH)
 	{
 		bresenham(data, p, dir, length);
 		del_x = (dir.x - data->player.x);
 		del_y = (dir.y - data->player.y);
-		dir.x = (del_x * cos(FOV / 700) - del_y * sin(FOV / 700))
+		dir.x = (del_x * cos(FOV / WIDTH) - del_y * sin(FOV / WIDTH))
 			+ data->player.x;
-		dir.y = (del_x * sin(FOV / 700) + del_y * cos(FOV / 700))
+		dir.y = (del_x * sin(FOV / WIDTH) + del_y * cos(FOV / WIDTH))
 			+ data->player.y;
-		data->ray_angle += FOV / 700;
+		data->ray_angle += FOV / WIDTH;
 	}
 }
 void	draw_cell(t_data *data, int x, int y, int color)
@@ -128,8 +128,8 @@ void draw_background(t_data *data)
 	int	x;
 	int	y;
 
-	x = 700;
-	while (x < 1400)
+	x = 0;
+	while (x < WIDTH)
 	{
 		y = 100;
 		while (y < HEIGHT / 2)
@@ -139,8 +139,8 @@ void draw_background(t_data *data)
 		}
 		x++;
 	}
-	x = 700;
-	while (x < 1400)
+	x = 0;
+	while (x < WIDTH)
 	{
 		y = HEIGHT / 2;
 		while (y < HEIGHT - 100)

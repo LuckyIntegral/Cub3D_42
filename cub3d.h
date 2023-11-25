@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 14:37:45 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 15:04:43 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define INVALID_FILE_CONTENT "cub3d: Wrong file content\n"
 
 // screen size
-# define WIDTH 1536
+# define WIDTH 1200
 # define HEIGHT 800
 
 // keys
