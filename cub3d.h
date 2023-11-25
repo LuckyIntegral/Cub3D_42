@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 15:13:13 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 18:35:00 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,18 @@
 # define CROSS 17
 # define IMAGE_SIZE 32
 # define SPEED 10
-# define MMAP_SIZE 8
 # define ROTATE_SPEED 0.174533
 # define PLANE_L 90
 # define DIR_L 100
 # define FOV 1.0472
+
+// minimap utils
+# define MMAP_RADIUS 10
+# define MMAP_SIZE 8
+# define MMAP_BORDER 0x008000
+# define MMAP_PLAYER 0x008000
+# define MMAP_EMPTY 0x008000
+# define MMAP_WALL 0x008000
 
 typedef enum e_error_mode
 {
@@ -124,8 +131,12 @@ typedef struct s_data
 }				t_data;
 
 // mlx utils
-int				key_handler(int key, t_data *data);
 void			bresenham(t_data *data, t_point p1, t_point p2, float length);
+void			ft_new_image(t_data *data, int width, int height);
+void			draw_cell(t_data *data, int x, int y, int color);
+void			draw_minimap(t_data *data);
+int				key_handler(int key, t_data *data);
+
 // rotation v1
 void			go_right(t_data *data);
 void			go_left(t_data *data);

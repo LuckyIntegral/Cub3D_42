@@ -8,7 +8,7 @@ LIBDIR	= ./libft
 LIBFT	= ${LIBDIR}/libft.a
 
 SRCS	= exit_utils.c input_validator.c input_parser.c input_parser_2.c \
-		map_validator.c mlx_functions.c moves.c init.c main.c
+		map_validator.c mlx_functions.c mlx_functions_2.c moves.c init.c main.c
 
 OBJS_DIR	= objs
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

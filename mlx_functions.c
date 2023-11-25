@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 18:09:46 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 18:34:43 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft/libft.h"
-#include <math.h>
-#include <mlx.h>
-#include <time.h>
 
 void	ft_new_image(t_data *data, int width, int height)
 {
@@ -24,6 +20,7 @@ void	ft_new_image(t_data *data, int width, int height)
 			&data->img->endian);
 	data->img->bits_per_pixel /= 8;
 }
+
 void	draw_view(t_data *data, float dist, t_point p)
 {
 	int	x;
@@ -42,7 +39,7 @@ void	draw_view(t_data *data, float dist, t_point p)
 		i++;
 		ty += ty_step;
 	}
-	
+
 }
 
 void	bresenham(t_data *data, t_point p1, t_point p2, float length)
@@ -81,6 +78,7 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 		p1.y += ey;
 	}
 }
+
 void	do_rays(t_data *data, t_point dir, float length)
 {
 	t_point	p;
@@ -108,22 +106,7 @@ void	do_rays(t_data *data, t_point dir, float length)
 		data->ray_angle += FOV / WIDTH;
 	}
 }
-void	draw_cell(t_data *data, int x, int y, int color)
-{
-	const int	x1 = x + MMAP_SIZE;
-	const int	y1 = y + MMAP_SIZE;
 
-	while (x < x1)
-	{
-		y = y1 - MMAP_SIZE;
-		while (y < y1)
-		{
-			data->img->pixels[WIDTH * (int)y + (int)x] = color;
-			y++;
-		}
-		x++;
-	}
-}
 void draw_background(t_data *data)
 {
 	int	x;
@@ -150,26 +133,17 @@ void draw_background(t_data *data)
 			y++;
 		}
 		x++;
-	}	
+	}
 }
 
 int	display_handler(t_data *data)
 {
 	clock_t start_time, end_time;
 	start_time = clock();
-	
+
 	ft_new_image(data, WIDTH, HEIGHT);
 	draw_background(data);
-	for (int y = 0; y < data->input.height; y++)
-	{
-		for (int x = 0; x < data->input.width; x++)
-		{
-			if (data->input.map[y][x] == '0')
-				draw_cell(data, x * MMAP_SIZE, y * MMAP_SIZE, 0x550000);
-			else if (data->input.map[y][x] == '1')
-				draw_cell(data, x * MMAP_SIZE, y *MMAP_SIZE, 0xFFFFFF);
-		}
-	}
+	draw_minimap(data);
 	do_rays(data, data->dir, 1);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
 		data->img->reference, 0, 10);
@@ -189,10 +163,7 @@ int	display_handler(t_data *data)
 		mlx_string_put(data->mlx_ptr, data->mlx_window, 1, 10, 0x00FF00, ft_itoa(data->fps));
 		data->frame_count = 0;
 		data->total_time = 0.0;
-		
 	}
-	
-		
 	return (0);
 }
 
