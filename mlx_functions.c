@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 16:16:07 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 18:09:46 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,20 @@ void	ft_new_image(t_data *data, int width, int height)
 void	draw_view(t_data *data, float dist, t_point p)
 {
 	int	x;
-	int	y;
 	int	i;
 
 	x = (int)(32 * 400 / dist);
-	if (x > 320)
-		x = 320;
-	y = 400 + x;
+	float ty_step = 32.0/(float)(2* x);
+	if (x > 400)
+		x = 400;
+	float ty = 0;
+	float tx = (int)(p.x) % 32;
 	i = 400 - x;
-	while (i < y)
+	while (i < 400 + x)
 	{
-		if (!(data->input.map[(int)p.y / IMAGE_SIZE][(int)p.x / IMAGE_SIZE] == ' '))
-			data->img->pixels[WIDTH * i + data->ray_num] = data->east_img->pixels[32 * (i - (400 - x)) + ((int)p.x % 32)];
+		data->img->pixels[WIDTH * i  + data->ray_num] = data->east_img->pixels[(int)ty * 32 + (int)tx];
 		i++;
+		ty += ty_step;
 	}
 	
 }
@@ -131,7 +132,7 @@ void draw_background(t_data *data)
 	x = 0;
 	while (x < WIDTH)
 	{
-		y = 100;
+		y = 0;
 		while (y < HEIGHT / 2)
 		{
 			data->img->pixels[WIDTH * y + x] = data->input.ceiling;
@@ -143,7 +144,7 @@ void draw_background(t_data *data)
 	while (x < WIDTH)
 	{
 		y = HEIGHT / 2;
-		while (y < HEIGHT - 100)
+		while (y < HEIGHT)
 		{
 			data->img->pixels[WIDTH * y + x] = data->input.floor;
 			y++;
