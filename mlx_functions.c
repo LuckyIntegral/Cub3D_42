@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 21:19:27 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 22:01:45 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,19 @@ void	draw_view(t_data *data, float dist, t_point p)
 	int	x;
 	int	i;
 
-	x = (int)(IMAGE_SIZE * 400 / dist);
-	float ty_step = 1024.0/(float)(2* x);
-	if (x > 400)
-		x = 400;
-	float ty_step = 32.0/(float)(2* x);
-	float y = 0;
-	float tx = (int)(p.x) % IMAGE_SIZE;
-	float ty = (int)(p.y) % IMAGE_SIZE;
-	i = 400 - x;
-	while (i < 400 + x)
+	x = (int)(IMAGE_SIZE * HEIGHT/2 / dist);
+	float ty_off = 0;
+	double ty_step = 1024.0/(float)(2* x);
+	if (x > HEIGHT/2)
+	{
+		ty_off = (x - HEIGHT/2); 
+		x = HEIGHT/2;
+	}
+	double y = ty_off *ty_step;
+	double tx = (int)(p.x) % IMAGE_SIZE;
+	double ty = (int)(p.y) % IMAGE_SIZE;
+	i = HEIGHT/2 - x;
+	while (i < HEIGHT/2 + x)
 	{
 		if ((int)tx == 0)
 			data->img->pixels[WIDTH * i  + data->ray_num] = data->east_img->pixels[(int)y * IMAGE_SIZE +(int)ty];

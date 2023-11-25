@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 19:53:09 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 21:29:40 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	init_images(t_data *data)
 	int	x;
 	int	y;
 
-	x = 32;
-	y = 32;
+	x = IMAGE_SIZE;
+	y = IMAGE_SIZE;
 	printf("west: %s eat: %s",data->input.west,data->input.east );
 	data->west_img->reference = mlx_xpm_file_to_image(data->mlx_ptr, data->input.west, &x, &y);
 	if (!data->west_img->reference)
@@ -74,4 +74,6 @@ void	init_structure(t_data *data)
 	data->player.player = 0;
 	data->player.x = 0;
 	data->player.y = 0;
+	data->total_time = 0;
+	data->fps = 0;
 }

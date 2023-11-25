@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:43:26 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 21:02:57 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/25 21:21:18 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static void	draw_border(t_data *data)
 
 void	draw_minimap(t_data *data)
 {
-	const int	px = (int) (data->player.x / 32.0);
-	const int	py = (int) (data->player.y / 32.0);
+	const int	px = (int) (data->player.x / 1024.0);
+	const int	py = (int) (data->player.y / 1024.0);
 	int			x;
 	int			y;
 
