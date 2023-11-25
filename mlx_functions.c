@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 19:53:41 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 20:03:13 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 			if ( data->input.map[(int)p1.y
 			/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == ' ')
 				p1.x -= ex;
-			draw_view(data, sqrt(pow(data->player.y - p1.y, 2)
+			draw_view(data, 5+sqrt(pow(data->player.y - p1.y, 2)
 					+ pow(data->player.x - p1.x, 2))* cos(fabs(data->ray_angle)), p1);
 			break ;
 		}
