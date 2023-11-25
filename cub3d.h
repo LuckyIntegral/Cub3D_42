@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 21:14:14 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 21:19:02 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@
 // minimap utils
 # define MMAP_RADIUS 10
 # define MMAP_SIZE 8
-# define MMAP_BORDER 0x008000
-# define MMAP_PLAYER 0x008000
-# define MMAP_EMPTY 0x008000
-# define MMAP_WALL 0x008000
+# define MMAP_BORDER 0x0000FF // Blue
+# define MMAP_PLAYER 0xFF0000 // Red
+# define MMAP_EMPTY 0x00FF00 // Green
+# define MMAP_WALL 0x808080 // Gray
 
 typedef enum e_error_mode
 {

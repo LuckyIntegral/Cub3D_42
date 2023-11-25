@@ -6,13 +6,11 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:43:26 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 18:35:21 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/25 21:02:57 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft/libft.h"
-#include <mlx.h>
 
 void	draw_cell(t_data *data, int x, int y, int color)
 {
@@ -24,14 +22,14 @@ void	draw_cell(t_data *data, int x, int y, int color)
 		y = y1 - MMAP_SIZE;
 		while (y < y1)
 		{
-			data->img->pixels[WIDTH * (int)y + (int)x] = color;
+			data->img->pixels[WIDTH * y + x] = color;
 			y++;
 		}
 		x++;
 	}
 }
 
-void	draw_minimap(t_data *data)
+static void	draw_border(t_data *data)
 {
 	int	x;
 	int	y;
@@ -39,25 +37,49 @@ void	draw_minimap(t_data *data)
 	x = -MMAP_RADIUS;
 	while (x <= MMAP_RADIUS)
 	{
-		y = -MMAP_RADIUS;
-		while (y <= MMAP_RADIUS)
+		draw_cell(data, (x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
+			0, MMAP_BORDER);
+		draw_cell(data, (x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
+			(MMAP_RADIUS * 2) * (MMAP_SIZE + 1), MMAP_BORDER);
+		if (ft_abs(x) == MMAP_RADIUS)
 		{
-			if (ft_abs(x) == MMAP_RADIUS || ft_abs(y) == MMAP_RADIUS)
+			y = -MMAP_RADIUS + 1;
+			while (y <= MMAP_RADIUS - 1)
+			{
 				draw_cell(data, (x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
-				(y + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + y, MMAP_BORDER);
+					(y + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + y, MMAP_BORDER);
+				y++;
+			}
+		}
+		x++;
+	}
+}
+
+void	draw_minimap(t_data *data)
+{
+	const int	px = (int) (data->player.x / 32.0);
+	const int	py = (int) (data->player.y / 32.0);
+	int			x;
+	int			y;
+
+	draw_border(data);
+	x = px < MMAP_RADIUS - 1 ? -px : -MMAP_RADIUS + 1;
+	while (x <= MMAP_RADIUS - 1 && px + x < data->input.width)
+	{
+		y = py < MMAP_RADIUS - 1 ? -py : -MMAP_RADIUS + 1;
+		while (y <= MMAP_RADIUS - 1 && py + y < data->input.height)
+		{
+			if (data->input.map[py + y][px + x] == '0')
+				draw_cell(data, (x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
+					(y + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + y, MMAP_EMPTY);
+			else if (data->input.map[py + y][px + x] == '1')
+				draw_cell(data, (x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
+					(y + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + y, MMAP_WALL);
 			y++;
 		}
 		x++;
 	}
-	// for (int y = 0; y < data->input.height; y++)
-	// {
-	// 	for (int x = 0; x < data->input.width; x++)
-	// 	{
-	// 		if (data->input.map[y][x] == '0')
-	// 			draw_cell(data, x * MMAP_SIZE, y * MMAP_SIZE, 0x550000);
-	// 		else if (data->input.map[y][x] == '1')
-	// 			draw_cell(data, x * MMAP_SIZE, y *MMAP_SIZE, 0xFFFFFF);
-	// 	}
-	// }
-
+	data->img->pixels[((MMAP_RADIUS + 1) * MMAP_SIZE + 2) * WIDTH + (MMAP_RADIUS + 1) * MMAP_SIZE + 2] = MMAP_PLAYER;
+	// draw_cell(data, (MMAP_RADIUS + 1) * MMAP_SIZE + 2,
+	// 				(MMAP_RADIUS + 1) * MMAP_SIZE + 2, MMAP_PLAYER);
 }
