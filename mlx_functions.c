@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 15:03:42 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 16:16:07 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	draw_view(t_data *data, float dist, t_point p)
 	int	i;
 
 	x = (int)(32 * 400 / dist);
-	if (x > 300)
-		x = 300;
+	if (x > 320)
+		x = 320;
 	y = 400 + x;
 	i = 400 - x;
 	while (i < y)
