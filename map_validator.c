@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:54:09 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 15:51:00 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 19:57:14 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@ void	set_camera(t_data *data, int x, int y)
 	data->dir.y = y * IMAGE_SIZE - DIR_L * (data->input.map[y][x] == 'N') + DIR_L
 		* (data->input.map[y][x] == 'S');
 	data->dir.color = 0xFF0000;
-	data->plane.x = data->dir.x - PLANE_L * (data->input.map[y][x] == 'N')
-		+ PLANE_L * (data->input.map[y][x] == 'S');
-	data->plane.y = data->dir.y - PLANE_L * (data->input.map[y][x] == 'W')
-		+ PLANE_L * (data->input.map[y][x] == 'E');
-	data->plane2.x = data->dir.x + PLANE_L * (data->input.map[y][x] == 'N')
-		- PLANE_L * (data->input.map[y][x] == 'S');
-	data->plane2.y = data->dir.y + PLANE_L * (data->input.map[y][x] == 'W')
-		- PLANE_L * (data->input.map[y][x] == 'E');
 	data->plane.color = 0xFFFF00;
 }
 static int	find_player(t_data *data)

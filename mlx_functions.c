@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 18:36:35 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/25 19:53:41 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,22 @@ void	draw_view(t_data *data, float dist, t_point p)
 	float ty_step = 32.0/(float)(2* x);
 	if (x > 400)
 		x = 400;
-	float ty = 0;
+	float y = 0;
 	float tx = (int)(p.x) % 32;
+	float ty = (int)(p.y) % 32;
 	i = 400 - x;
 	while (i < 400 + x)
 	{
-		data->img->pixels[WIDTH * i  + data->ray_num] = data->east_img->pixels[(int)ty * 32 + (int)tx];
+		if ((int)tx == 0)
+			data->img->pixels[WIDTH * i  + data->ray_num] = data->east_img->pixels[(int)y * 32 +(int)ty];
+		else if ((int)ty == 0)
+			data->img->pixels[WIDTH * i  + data->ray_num] = data->south_img->pixels[(int)y * 32 + 31 - (int)tx];
+		else if ((int)tx == 31)
+			data->img->pixels[WIDTH * i  + data->ray_num] = data->west_img->pixels[(int)y * 32 + 31 - (int)ty];
+		else if ((int)ty == 31)
+			data->img->pixels[WIDTH * i  + data->ray_num] = data->north_img->pixels[(int)y * 32 +(int)tx];
 		i++;
-		ty += ty_step;
+		y += ty_step;
 	}
 
 }
@@ -149,6 +157,7 @@ int	display_handler(t_data *data)
 		data->img->reference, 0, 10);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
 		data->east_img->reference, 0, 300);
+	
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);
 	end_time = clock();
 	double frame_time = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;

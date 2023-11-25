@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 18:36:41 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/25 19:57:18 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@
 # define IMAGE_SIZE 32
 # define SPEED 10
 # define ROTATE_SPEED 0.174533
-# define PLANE_L 90
 # define DIR_L 100
 # define FOV 1.0472
 
@@ -73,7 +72,6 @@ typedef struct s_player
 	char		player;
 	float		x;
 	float		y;
-	float angle; // in radians, for later:)
 }				t_player;
 
 typedef struct s_point
@@ -121,6 +119,9 @@ typedef struct s_data
 	void		*east;
 	t_image		*img;
 	t_image		*east_img;
+	t_image		*west_img;
+	t_image		*north_img;
+	t_image		*south_img;
 	t_point		dir;
 	t_point		plane;
 	t_point		plane2;

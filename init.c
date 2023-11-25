@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/24 17:28:42 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 19:53:09 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,39 @@ int	init_images(t_data *data)
 	int	x;
 	int	y;
 
-	x = 128;
-	y = 128;
+	x = 32;
+	y = 32;
+	printf("west: %s eat: %s",data->input.west,data->input.east );
+	data->west_img->reference = mlx_xpm_file_to_image(data->mlx_ptr, data->input.west, &x, &y);
+	if (!data->west_img->reference)
+		return (1);
+	data->west_img->pixels = (int *)mlx_get_data_addr(data->west_img->reference,
+			&data->west_img->bits_per_pixel, &data->west_img->line_size,
+			&data->west_img->endian);
+			
 	data->east_img->reference= mlx_xpm_file_to_image(data->mlx_ptr, data->input.east, &x, &y);
-	if (!data->east_img)
+	if (!data->east_img->reference)
 		return (1);
 	data->east_img->pixels = (int *)mlx_get_data_addr(data->east_img->reference,
 			&data->east_img->bits_per_pixel, &data->east_img->line_size,
 			&data->east_img->endian);
-	data->west = mlx_xpm_file_to_image(data->mlx_ptr, data->input.west, &x, &y);
-	if (!data->west)
-		return (1);
-	data->south = mlx_xpm_file_to_image(data->mlx_ptr, data->input.south, &x,
+			
+	data->south_img->reference = mlx_xpm_file_to_image(data->mlx_ptr, data->input.south, &x,
 			&y);
-	if (!data->south)
+	if (!data->south_img->reference)
 		return (1);
-	data->north = mlx_xpm_file_to_image(data->mlx_ptr, data->input.north, &x,
+	data->south_img->pixels = (int *)mlx_get_data_addr(data->south_img->reference,
+			&data->south_img->bits_per_pixel, &data->south_img->line_size,
+			&data->south_img->endian);
+			
+	data->north_img->reference = mlx_xpm_file_to_image(data->mlx_ptr, data->input.north, &x,
 			&y);
-	if (!data->north)
+	if (!data->north_img->reference)
 		return (1);
+	data->north_img->pixels = (int *)mlx_get_data_addr(data->north_img->reference,
+			&data->north_img->bits_per_pixel, &data->north_img->line_size,
+			&data->north_img->endian);
+			
 	return (0);
 }
 
