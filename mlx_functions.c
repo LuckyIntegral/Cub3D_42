@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/24 17:46:05 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 14:43:21 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	draw_view(t_data *data, float dist, t_point p)
 	i = 400 - x;
 	while (i < y)
 	{
-		data->img->pixels[WIDTH * i + 700 + data->ray_num] = data->east_img->pixels[32 * (i - (400 - x)) + ((int)p.x % 32)];
+		if (!(data->input.map[(int)p.y / IMAGE_SIZE][(int)p.x / IMAGE_SIZE] == ' '))
+			data->img->pixels[WIDTH * i + 700 + data->ray_num] = data->east_img->pixels[32 * (i - (400 - x)) + ((int)p.x % 32)];
 		i++;
 	}
 	
@@ -59,15 +60,18 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 	p2.y += ey * length;
 	while (1)
 	{
-		index = WIDTH * (int)p1.y + (int)p1.x;
+		index = WIDTH * (int)(p1.y * MMAP_SIZE / IMAGE_SIZE) + (int)(p1.x * MMAP_SIZE / IMAGE_SIZE);
 		if (data->ray_num % 1 == 0)
 			if (p1.y < HEIGHT && index >= 0 && p1.y >= 0 && p1.x >= 0
-				&& p1.x < WIDTH)
+				&& p1.x < WIDTH )
 					data->img->pixels[index] += 0x00A500;
 		if (IMAGE_SIZE * data->input.width > p1.x && IMAGE_SIZE
 			* data->input.height > p1.y && data->input.map[(int)p1.y
-			/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == '1')
+			/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] != '0')
 		{
+			if ( data->input.map[(int)p1.y
+			/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == ' ')
+				p1.x -= ex;
 			draw_view(data, sqrt(pow(data->player.y - p1.y, 2)
 					+ pow(data->player.x - p1.x, 2))* cos(fabs(data->ray_angle)), p1);
 			break ;
@@ -105,12 +109,12 @@ void	do_rays(t_data *data, t_point dir, float length)
 }
 void	draw_cell(t_data *data, int x, int y, int color)
 {
-	const int	x1 = x + IMAGE_SIZE;
-	const int	y1 = y + IMAGE_SIZE;
+	const int	x1 = x + MMAP_SIZE;
+	const int	y1 = y + MMAP_SIZE;
 
 	while (x < x1)
 	{
-		y = y1 - IMAGE_SIZE;
+		y = y1 - MMAP_SIZE;
 		while (y < y1)
 		{
 			data->img->pixels[WIDTH * (int)y + (int)x] = color;
@@ -160,16 +164,16 @@ int	display_handler(t_data *data)
 		for (int x = 0; x < data->input.width; x++)
 		{
 			if (data->input.map[y][x] == '0')
-				draw_cell(data, x * IMAGE_SIZE, y * IMAGE_SIZE, 0x550000);
+				draw_cell(data, x * MMAP_SIZE, y * MMAP_SIZE, 0x550000);
 			else if (data->input.map[y][x] == '1')
-				draw_cell(data, x * IMAGE_SIZE, y * IMAGE_SIZE, 0xFFFFFF);
+				draw_cell(data, x * MMAP_SIZE, y *MMAP_SIZE, 0xFFFFFF);
 		}
 	}
 	do_rays(data, data->dir, 1);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
 		data->img->reference, 0, 10);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
-		data->east_img->reference, 0, 10);
+		data->east_img->reference, 0, 300);
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);
 	end_time = clock();
 	double frame_time = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
