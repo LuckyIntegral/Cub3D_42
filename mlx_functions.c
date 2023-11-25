@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 19:53:41 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 20:29:24 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	draw_view(t_data *data, float dist, t_point p)
 	int	i;
 
 	x = (int)(32 * 400 / dist);
-	float ty_step = 32.0/(float)(2* x);
 	if (x > 400)
 		x = 400;
+	float ty_step = 32.0/(float)(2* x);
 	float y = 0;
 	float tx = (int)(p.x) % 32;
 	float ty = (int)(p.y) % 32;
@@ -55,7 +55,7 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 	float	ex;
 	float	ey;
 	float	max;
-	int		index;
+	// int		index;
 
 	ex = p2.x - p1.x;
 	ey = p2.y - p1.y;
@@ -66,11 +66,11 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 	p2.y += ey * length;
 	while (1)
 	{
-		index = WIDTH * (int)(p1.y * MMAP_SIZE / IMAGE_SIZE) + (int)(p1.x * MMAP_SIZE / IMAGE_SIZE);
-		if (data->ray_num % 1 == 0)
-			if (p1.y < HEIGHT && index >= 0 && p1.y >= 0 && p1.x >= 0
-				&& p1.x < WIDTH )
-					data->img->pixels[index] += 0x00A500;
+		// index = WIDTH * (int)(p1.y * MMAP_SIZE / IMAGE_SIZE) + (int)(p1.x * MMAP_SIZE / IMAGE_SIZE);
+		// if (data->ray_num % 1 == 0)
+		// 	if (p1.y < HEIGHT && index >= 0 && p1.y >= 0 && p1.x >= 0
+		// 		&& p1.x < WIDTH )
+		// 			data->img->pixels[index] += 0x00A500;
 		if (IMAGE_SIZE * data->input.width > p1.x && IMAGE_SIZE
 			* data->input.height > p1.y && data->input.map[(int)p1.y
 			/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] != '0')
@@ -151,13 +151,10 @@ int	display_handler(t_data *data)
 
 	ft_new_image(data, WIDTH, HEIGHT);
 	draw_background(data);
-	draw_minimap(data);
 	do_rays(data, data->dir, 1);
+	draw_minimap(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
 		data->img->reference, 0, 10);
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
-		data->east_img->reference, 0, 300);
-	
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);
 	end_time = clock();
 	double frame_time = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
