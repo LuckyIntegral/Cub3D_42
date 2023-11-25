@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 20:03:13 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/25 21:11:45 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,24 @@ void	draw_view(t_data *data, float dist, t_point p)
 	int	x;
 	int	i;
 
-	x = (int)(32 * 400 / dist);
-	float ty_step = 32.0/(float)(2* x);
+	x = (int)(IMAGE_SIZE * 400 / dist);
+	float ty_step = 1024.0/(float)(2* x);
 	if (x > 400)
 		x = 400;
 	float y = 0;
-	float tx = (int)(p.x) % 32;
-	float ty = (int)(p.y) % 32;
+	float tx = (int)(p.x) % IMAGE_SIZE;
+	float ty = (int)(p.y) % IMAGE_SIZE;
 	i = 400 - x;
 	while (i < 400 + x)
 	{
 		if ((int)tx == 0)
-			data->img->pixels[WIDTH * i  + data->ray_num] = data->east_img->pixels[(int)y * 32 +(int)ty];
+			data->img->pixels[WIDTH * i  + data->ray_num] = data->east_img->pixels[(int)y * IMAGE_SIZE +(int)ty];
 		else if ((int)ty == 0)
-			data->img->pixels[WIDTH * i  + data->ray_num] = data->south_img->pixels[(int)y * 32 + 31 - (int)tx];
-		else if ((int)tx == 31)
-			data->img->pixels[WIDTH * i  + data->ray_num] = data->west_img->pixels[(int)y * 32 + 31 - (int)ty];
-		else if ((int)ty == 31)
-			data->img->pixels[WIDTH * i  + data->ray_num] = data->north_img->pixels[(int)y * 32 +(int)tx];
+			data->img->pixels[WIDTH * i  + data->ray_num] = data->south_img->pixels[(int)y * IMAGE_SIZE + IMAGE_SIZE-1 - (int)tx];
+		else if ((int)tx == IMAGE_SIZE-1)
+			data->img->pixels[WIDTH * i  + data->ray_num] = data->west_img->pixels[(int)y * IMAGE_SIZE + IMAGE_SIZE-1 - (int)ty];
+		else if ((int)ty == IMAGE_SIZE-1)
+			data->img->pixels[WIDTH * i  + data->ray_num] = data->north_img->pixels[(int)y * IMAGE_SIZE +(int)tx];
 		i++;
 		y += ty_step;
 	}
@@ -78,7 +78,7 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 			if ( data->input.map[(int)p1.y
 			/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == ' ')
 				p1.x -= ex;
-			draw_view(data, 5+sqrt(pow(data->player.y - p1.y, 2)
+			draw_view(data, sqrt(pow(data->player.y - p1.y, 2)
 					+ pow(data->player.x - p1.x, 2))* cos(fabs(data->ray_angle)), p1);
 			break ;
 		}
@@ -155,8 +155,6 @@ int	display_handler(t_data *data)
 	do_rays(data, data->dir, 1);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
 		data->img->reference, 0, 10);
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
-		data->east_img->reference, 0, 300);
 	
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);
 	end_time = clock();

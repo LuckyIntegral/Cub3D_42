@@ -1,7 +1,7 @@
-EA ./textures/east_32.xpm
-NO ./textures/north_32.xpm
-SO ./textures/south_32.xpm
-WE ./textures/west_32.xpm
+EA ./textures/cotik.xpm
+NO ./textures/cotik.xpm
+SO ./textures/cotik.xpm
+WE ./textures/cotik.xpm
 
 F 255,102,255
 C 0,100,100
