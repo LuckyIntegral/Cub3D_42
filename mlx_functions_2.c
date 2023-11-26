@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:43:26 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 17:59:01 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/26 19:07:18 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,6 @@ void	draw_minimap(t_data *data)
 	int			y;
 
 	draw_border(data);
-	if (px < MMAP_RADIUS - 1)
-		x = -px;
-	else
-	 	x = -MMAP_RADIUS + 1;
 	x = px < MMAP_RADIUS - 1 ? -px : -MMAP_RADIUS + 1;
 	while (x <= MMAP_RADIUS - 1 && px + x < data->input.width)
 	{
