@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:43:26 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 21:21:18 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/26 17:59:01 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <stdio.h>
 
 void	draw_cell(t_data *data, int x, int y, int color)
 {
@@ -59,10 +60,15 @@ void	draw_minimap(t_data *data)
 {
 	const int	px = (int) (data->player.x / 1024.0);
 	const int	py = (int) (data->player.y / 1024.0);
+	printf("px: %d, py: %d\n", px, py);
 	int			x;
 	int			y;
 
 	draw_border(data);
+	if (px < MMAP_RADIUS - 1)
+		x = -px;
+	else
+	 	x = -MMAP_RADIUS + 1;
 	x = px < MMAP_RADIUS - 1 ? -px : -MMAP_RADIUS + 1;
 	while (x <= MMAP_RADIUS - 1 && px + x < data->input.width)
 	{
@@ -79,7 +85,7 @@ void	draw_minimap(t_data *data)
 		}
 		x++;
 	}
-	data->img->pixels[((MMAP_RADIUS + 1) * MMAP_SIZE + 2) * WIDTH + (MMAP_RADIUS + 1) * MMAP_SIZE + 2] = MMAP_PLAYER;
-	// draw_cell(data, (MMAP_RADIUS + 1) * MMAP_SIZE + 2,
-	// 				(MMAP_RADIUS + 1) * MMAP_SIZE + 2, MMAP_PLAYER);
+	// data->img->pixels[((MMAP_RADIUS + 1) * MMAP_SIZE + 2) * WIDTH + (MMAP_RADIUS + 1) * MMAP_SIZE + 2] = MMAP_PLAYER;
+	draw_cell(data, (MMAP_RADIUS + 1) * MMAP_SIZE + 2,
+					(MMAP_RADIUS + 1) * MMAP_SIZE + 2, MMAP_PLAYER);
 }
