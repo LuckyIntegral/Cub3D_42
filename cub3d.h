@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 18:51:07 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/26 19:03:26 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <time.h>
 # include <unistd.h>
 
 # define NAME "Cub 3D"
