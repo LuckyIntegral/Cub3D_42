@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 17:42:16 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/26 18:51:07 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ typedef enum e_error_mode
 typedef struct s_player
 {
 	char		player;
-	float		x;
-	float		y;
+	double		x;
+	double		y;
 }				t_player;
 
 typedef struct s_point
 {
-	float		x;
-	float		y;
+	double		x;
+	double		y;
 	int			color;
 }				t_point;
 
@@ -110,10 +110,6 @@ typedef struct s_data
 	void		*mlx_window;
 	t_input		input;
 	t_player	player;
-	void		*north;
-	void		*south;
-	void		*west;
-	void		*east;
 	t_image		*img;
 	t_image		*east_img;
 	t_image		*west_img;
@@ -123,17 +119,17 @@ typedef struct s_data
 	t_point		plane;
 	t_point		plane2;
 	int			ray_num;
-	float		ray_angle;
-	float		ty_step;
+	double		ray_angle;
+	double		ty_step;
 }				t_data;
 
 // mlx utils
-void			bresenham(t_data *data, t_point p1, t_point p2, float length);
+void			bresenham(t_data *data, t_point p1, t_point p2, double length);
 void			ft_new_image(t_data *data, int width, int height);
 void			draw_cell(t_data *data, int x, int y, int color);
 void			draw_minimap(t_data *data);
 int				key_handler(int key, t_data *data);
-void			do_rays(t_data *data, t_point dir, float length);
+void			do_rays(t_data *data, t_point dir, double length);
 // rotation v1
 void			go_right(t_data *data);
 void			go_left(t_data *data);
@@ -141,10 +137,10 @@ void			go_backward(t_data *data);
 void			go_forward(t_data *data);
 void			turn_left(t_data *data);
 void			turn_right(t_data *data);
-void			rotate_vec(float *beg_x, float *beg_y, float *end_x,
-					float *end_y);
-void			rotate_vec_back(float *beg_x, float *beg_y, float *end_x,
-					float *end_y);
+void			rotate_vec(double *beg_x, double *beg_y, double *end_x,
+					double *end_y);
+void			rotate_vec_back(double *beg_x, double *beg_y, double *end_x,
+					double *end_y);
 
 // exit utils
 void			clean_input_structure(t_input *data);

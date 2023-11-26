@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 17:37:55 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/26 18:51:17 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,6 @@ void	init_structure(t_data *data)
 	data->img = NULL;
 	data->mlx_ptr = NULL;
 	data->mlx_window = NULL;
-	data->east = NULL;
-	data->west = NULL;
-	data->south = NULL;
-	data->north = NULL;
 	data->input.map = NULL;
 	data->input.width = 0;
 	data->input.height = 0;

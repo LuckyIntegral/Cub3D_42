@@ -6,16 +6,16 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:19:58 by dgutak            #+#    #+#             */
-/*   Updated: 2023/11/26 17:34:45 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/26 18:42:49 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_pixel(t_data *data, t_point p, int x, float y)
+void	put_pixel(t_data *data, t_point p, int x, double y)
 {
-	float	tx;
-	float	ty;
+	double	tx;
+	double	ty;
 	int		i;
 
 	tx = (int)(p.x) % IMAGE_SIZE;
@@ -41,15 +41,15 @@ void	put_pixel(t_data *data, t_point p, int x, float y)
 	}
 }
 
-void	draw_view(t_data *data, float dist, t_point p)
+void	draw_view(t_data *data, double dist, t_point p)
 {
 	int		x;
-	float	ty_off;
+	double	ty_off;
 	double	y;
 
 	x = (int)(IMAGE_SIZE * HEIGHT / 2 / dist);
 	ty_off = 0;
-	data->ty_step = 1024.0 / (float)(2 * x);
+	data->ty_step = 1024.0 / (double)(2 * x);
 	if (x > HEIGHT / 2)
 	{
 		ty_off = (x - HEIGHT / 2);
@@ -59,7 +59,7 @@ void	draw_view(t_data *data, float dist, t_point p)
 	put_pixel(data, p, x, y);
 }
 
-void	try_draw(t_data *data, t_point p1, float ex)
+void	try_draw(t_data *data, t_point p1, double ex)
 {
 	if (data->input.map[(int)p1.y / IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == ' ')
 		p1.x -= ex;
@@ -67,11 +67,11 @@ void	try_draw(t_data *data, t_point p1, float ex)
 				- p1.x, 2)) * cos(fabs(data->ray_angle)), p1);
 }
 
-void	bresenham(t_data *data, t_point p1, t_point p2, float length)
+void	bresenham(t_data *data, t_point p1, t_point p2, double length)
 {
-	float	ex;
-	float	ey;
-	float	max;
+	double	ex;
+	double	ey;
+	double	max;
 
 	ex = p2.x - p1.x;
 	ey = p2.y - p1.y;
@@ -94,11 +94,11 @@ void	bresenham(t_data *data, t_point p1, t_point p2, float length)
 	}
 }
 
-void	do_rays(t_data *data, t_point dir, float length)
+void	do_rays(t_data *data, t_point dir, double length)
 {
 	t_point	p;
-	float	del_x;
-	float	del_y;
+	double	del_x;
+	double	del_y;
 
 	data->ray_num = -1;
 	p.x = data->player.x;

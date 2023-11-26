@@ -6,25 +6,25 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:24:06 by dgutak            #+#    #+#             */
-/*   Updated: 2023/11/26 15:24:36 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/26 18:42:49 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	rotate_vec(float *beg_x, float *beg_y, float *end_x, float *end_y)
+void	rotate_vec(double *beg_x, double *beg_y, double *end_x, double *end_y)
 {
-	const float	del_x = (*beg_x - *end_x);
-	const float	del_y = (*beg_y - *end_y);
+	const double	del_x = (*beg_x - *end_x);
+	const double	del_y = (*beg_y - *end_y);
 
 	*beg_x = (del_x * cos(ROTATE_SPEED) - del_y * sin(ROTATE_SPEED)) + *end_x;
 	*beg_y = (del_x * sin(ROTATE_SPEED) + del_y * cos(ROTATE_SPEED)) + *end_y;
 }
 
-void	rotate_vec_back(float *beg_x, float *beg_y, float *end_x, float *end_y)
+void	rotate_vec_back(double *beg_x, double *beg_y, double *end_x, double *end_y)
 {
-	const float	del_x = (*beg_x - *end_x);
-	const float	del_y = (*beg_y - *end_y);
+	const double	del_x = (*beg_x - *end_x);
+	const double	del_y = (*beg_y - *end_y);
 
 	*beg_x = (del_x * cos(-ROTATE_SPEED) - del_y * sin(-ROTATE_SPEED)) + *end_x;
 	*beg_y = (del_x * sin(-ROTATE_SPEED) + del_y * cos(-ROTATE_SPEED)) + *end_y;

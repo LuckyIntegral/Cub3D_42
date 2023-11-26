@@ -1,7 +1,7 @@
 NAME	= cub3D
 CC		= cc
 RM		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror -g -MD -MP -Ofast -march=native
+CFLAGS	= -Wall -Wextra -Werror -MD -MP -Ofast -march=native
 LINKS	= -L. -lmlx -lXext -lX11 -lm
 
 LIBDIR	= ./libft
