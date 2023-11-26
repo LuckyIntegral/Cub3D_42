@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rotations.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:24:06 by dgutak            #+#    #+#             */
-/*   Updated: 2023/11/26 19:06:42 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/26 20:11:00 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 void	rotate_vec(double *beg_x, double *beg_y, double *end_x, double *end_y)
 {

@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 19:03:26 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/26 20:55:01 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <X11/keysym.h>
+# include <unistd.h>
+# include <string.h>
+# include <stdlib.h>
 # include <errno.h>
 # include <fcntl.h>
-# include <math.h>
-# include <mlx.h>
 # include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+# include <math.h>
+# include <time.h>
+# include <mlx.h>
 
 # define NAME "Cub 3D"
 
@@ -103,6 +104,7 @@ typedef struct s_image
 	int			line_size;
 	int			endian;
 }				t_image;
+
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -117,6 +119,9 @@ typedef struct s_data
 	t_point		dir;
 	t_point		plane;
 	t_point		plane2;
+	double		total_time;
+	int			frame_count;
+	int			fps;
 	int			ray_num;
 	double		ray_angle;
 	double		ty_step;
@@ -129,6 +134,7 @@ void			draw_cell(t_data *data, int x, int y, int color);
 void			draw_minimap(t_data *data);
 int				key_handler(int key, t_data *data);
 void			do_rays(t_data *data, t_point dir, double length);
+
 // rotation v1
 void			go_right(t_data *data);
 void			go_left(t_data *data);

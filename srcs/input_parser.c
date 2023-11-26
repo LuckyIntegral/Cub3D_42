@@ -6,12 +6,11 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:50:06 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 20:49:52 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/26 20:08:50 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "libft/libft.h"
+#include "../includes/cub3d.h"
 
 static char	*append_offset(void *data, int size)
 {

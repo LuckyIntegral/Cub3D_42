@@ -1,7 +1,7 @@
-EA ./textures/kasino1.xpm
-NO ./textures/kasino2.xpm
-SO ./textures/kasino3.xpm
-WE ./textures/kasino4.xpm
+EA ./textures/casino1.xpm
+NO ./textures/casino2.xpm
+SO ./textures/casino3.xpm
+WE ./textures/casino4.xpm
 
 C 174,164,164
 F 64,64,64

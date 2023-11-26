@@ -4,4 +4,5 @@
 /libft/*.o
 libft/libft.a
 cub3D
+cub3D_bonus
 .vscode

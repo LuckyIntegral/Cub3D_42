@@ -6,11 +6,11 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:10:14 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/18 13:38:08 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/26 20:11:25 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 char	*skip_new_lines(char *str, const int fd)
 {

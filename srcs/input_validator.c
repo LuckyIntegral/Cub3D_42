@@ -6,11 +6,11 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:02:29 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/19 18:24:53 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/26 20:08:52 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 void	trim_map(t_input *data)
 {
