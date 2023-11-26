@@ -6,12 +6,11 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:43:26 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 19:07:18 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/26 19:14:32 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 
 void	draw_cell(t_data *data, int x, int y, int color)
 {
@@ -48,7 +47,8 @@ static void	draw_border(t_data *data)
 			while (y <= MMAP_RADIUS - 1)
 			{
 				draw_cell(data, (x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
-					(y + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + y, MMAP_BORDER);
+					(y + MMAP_RADIUS) * MMAP_SIZE
+					+ MMAP_RADIUS + y, MMAP_BORDER);
 				y++;
 			}
 		}
@@ -58,22 +58,22 @@ static void	draw_border(t_data *data)
 
 void	draw_minimap(t_data *data)
 {
-	const int	px = (int) (data->player.x / 1024.0);
-	const int	py = (int) (data->player.y / 1024.0);
-	printf("px: %d, py: %d\n", px, py);
+	const int	px = (int)(data->player.x / 1024.0);
+	const int	py = (int)(data->player.y / 1024.0);
 	int			x;
 	int			y;
 
 	draw_border(data);
-	x = px < MMAP_RADIUS - 1 ? -px : -MMAP_RADIUS + 1;
+	x = ft_tr(px < MMAP_RADIUS - 1, -px, -MMAP_RADIUS + 1);
 	while (x <= MMAP_RADIUS - 1 && px + x < data->input.width)
 	{
-		y = py < MMAP_RADIUS - 1 ? -py : -MMAP_RADIUS + 1;
+		y = ft_tr(py < MMAP_RADIUS - 1, -py, -MMAP_RADIUS + 1);
 		while (y <= MMAP_RADIUS - 1 && py + y < data->input.height)
 		{
 			if (data->input.map[py + y][px + x] == '0')
 				draw_cell(data, (x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
-					(y + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + y, MMAP_EMPTY);
+					(y + MMAP_RADIUS) * MMAP_SIZE
+					+ MMAP_RADIUS + y, MMAP_EMPTY);
 			else if (data->input.map[py + y][px + x] == '1')
 				draw_cell(data, (x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
 					(y + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + y, MMAP_WALL);
@@ -81,7 +81,6 @@ void	draw_minimap(t_data *data)
 		}
 		x++;
 	}
-	// data->img->pixels[((MMAP_RADIUS + 1) * MMAP_SIZE + 2) * WIDTH + (MMAP_RADIUS + 1) * MMAP_SIZE + 2] = MMAP_PLAYER;
 	draw_cell(data, (MMAP_RADIUS + 1) * MMAP_SIZE + 2,
-					(MMAP_RADIUS + 1) * MMAP_SIZE + 2, MMAP_PLAYER);
+		(MMAP_RADIUS + 1) * MMAP_SIZE + 2, MMAP_PLAYER);
 }
