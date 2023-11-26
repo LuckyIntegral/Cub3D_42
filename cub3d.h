@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 21:42:17 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/26 17:42:16 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <unistd.h>
 # include <time.h>
+# include <unistd.h>
 
 # define NAME "Cub 3D"
 
@@ -58,8 +58,8 @@
 # define MMAP_SIZE 8
 # define MMAP_BORDER 0x0000FF // Blue
 # define MMAP_PLAYER 0xFF0000 // Red
-# define MMAP_EMPTY 0x00FF00 // Green
-# define MMAP_WALL 0x808080 // Gray
+# define MMAP_EMPTY 0x00FF00  // Green
+# define MMAP_WALL 0x808080   // Gray
 
 typedef enum e_error_mode
 {
@@ -104,9 +104,6 @@ typedef struct s_image
 	int			line_size;
 	int			endian;
 }				t_image;
-
-// Maybe later i will rewrite everything into one struct, but i dont think so:)
-// Feel free rewrite it:)
 typedef struct s_data
 {
 	void		*mlx_ptr;
@@ -127,9 +124,7 @@ typedef struct s_data
 	t_point		plane2;
 	int			ray_num;
 	float		ray_angle;
-	double total_time;
-	int frame_count;
-	int fps;
+	float		ty_step;
 }				t_data;
 
 // mlx utils
@@ -138,7 +133,7 @@ void			ft_new_image(t_data *data, int width, int height);
 void			draw_cell(t_data *data, int x, int y, int color);
 void			draw_minimap(t_data *data);
 int				key_handler(int key, t_data *data);
-
+void			do_rays(t_data *data, t_point dir, float length);
 // rotation v1
 void			go_right(t_data *data);
 void			go_left(t_data *data);
@@ -146,6 +141,10 @@ void			go_backward(t_data *data);
 void			go_forward(t_data *data);
 void			turn_left(t_data *data);
 void			turn_right(t_data *data);
+void			rotate_vec(float *beg_x, float *beg_y, float *end_x,
+					float *end_y);
+void			rotate_vec_back(float *beg_x, float *beg_y, float *end_x,
+					float *end_y);
 
 // exit utils
 void			clean_input_structure(t_input *data);
@@ -156,6 +155,7 @@ int				close_game(t_data *data);
 // map validation
 int				is_valid_map(t_data *data);
 void			trim_map(t_input *data);
+void			set_camera(t_data *data, int x, int y);
 
 // input part
 void			parse_elements(t_input *data, const int fd);

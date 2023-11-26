@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:08:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/21 00:07:35 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/26 17:45:46 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,28 @@ void	error_handler(char *str, int mode)
 
 void	clean_data(t_data *data)
 {
-	if (data->east)
-		mlx_destroy_image(data->mlx_ptr, data->east);
-	if (data->west)
-		mlx_destroy_image(data->mlx_ptr, data->west);
-	if (data->south)
-		mlx_destroy_image(data->mlx_ptr, data->south);
-	if (data->north)
-		mlx_destroy_image(data->mlx_ptr, data->north);
+	if (data->east_img->reference)
+		mlx_destroy_image(data->mlx_ptr, data->east_img->reference);
+	if (data->west_img->reference)
+		mlx_destroy_image(data->mlx_ptr, data->west_img->reference);
+	if (data->south_img->reference)
+		mlx_destroy_image(data->mlx_ptr, data->south_img->reference);
+	if (data->north_img->reference)
+		mlx_destroy_image(data->mlx_ptr, data->north_img->reference);
 	if (data->mlx_window)
 		mlx_destroy_window(data->mlx_ptr, data->mlx_window);
 	if (data->mlx_ptr)
 		(mlx_destroy_display(data->mlx_ptr), free(data->mlx_ptr));
 	if (data->img)
 		free(data->img);
+	if (data->east_img)
+		free(data->east_img);
+	if (data->north_img)
+		free(data->north_img);
+	if (data->south_img)
+		free(data->south_img);
+	if (data->west_img)
+		free(data->west_img);
 	clean_input_structure(&data->input);
 }
 

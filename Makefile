@@ -1,14 +1,14 @@
 NAME	= cub3D
 CC		= cc
 RM		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror -g -MD -MP -Ofast
+CFLAGS	= -Wall -Wextra -Werror -g -MD -MP -Ofast -march=native
 LINKS	= -L. -lmlx -lXext -lX11 -lm
 
 LIBDIR	= ./libft
 LIBFT	= ${LIBDIR}/libft.a
 
 SRCS	= exit_utils.c input_validator.c input_parser.c input_parser_2.c \
-		map_validator.c mlx_functions.c mlx_functions_2.c moves.c init.c main.c
+		map_validator.c mlx_functions.c mlx_functions_2.c moves.c init.c main.c do_rays.c rotations.c
 
 OBJS_DIR	= objs
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))

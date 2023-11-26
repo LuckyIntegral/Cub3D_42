@@ -6,14 +6,14 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/25 19:33:10 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/26 17:42:10 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <mlx.h>
 
-int	mlx_start_program(t_data *data)
+int	alloc_textures(t_data *data)
 {
 	data->img = (t_image *)malloc(sizeof(t_image));
 	if (!data->img)
@@ -29,6 +29,13 @@ int	mlx_start_program(t_data *data)
 		return (1);
 	data->west_img = (t_image *)malloc(sizeof(t_image));
 	if (!data->west_img)
+		return (1);
+	return (0);
+}
+
+int	mlx_start_program(t_data *data)
+{
+	if (alloc_textures(data))
 		return (1);
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
@@ -54,22 +61,7 @@ int	main(int argc, char **argv)
 	input_parser(&data.input, argv[1]);
 	if (!is_valid_map(&data))
 		(clean_data(&data), error_handler(INVALID_FILE_CONTENT, CUSTOM));
-	printf("map: %s\n", data.input.map[0]);
 	if (mlx_start_program(&data))
 		(clean_data(&data), error_handler(MLX_CONTEXT, CUSTOM));
-	// printf("data no (%s)\n", data.input.north);
-	// printf("data so (%s)\n", data.input.south);
-	// printf("data we (%s)\n", data.input.west);
-	// printf("data ea (%s)\n", data.input.east);
-	// printf("data floor (%d)\n", data.input.floor);
-	// printf("data ceil (%d)\n", data.input.ceiling);
-
-	// printf("player %c, {%d, %d}\n", data.input.player.player, data.input.player.x, data.input.player.y);
-
-	// printf("map size: width = %d, height = %d\n", data.input.width, data.input.height);
-	// for (int i = 0; i < data.input.height; i++) {
-	// 	printf("%02d)%s\n", i + 1, data.input.map[i]);
-	// }
-
 	clean_data(&data);
 }
