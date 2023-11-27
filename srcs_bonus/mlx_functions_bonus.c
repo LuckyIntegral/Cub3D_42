@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 16:23:48 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 20:22:51 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,11 @@ static void	ft_itoa_insert(int n, char *str)
 void	print_fps(t_data *data)
 {
 	double	frame_time;
-	char	str[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	char	str[20];
 	int		i;
 
 	data->end_time = clock();
+	ft_bzero(str, 20 * sizeof(char));
 	frame_time = ((double)(data->end_time - data->start_time)) / CLOCKS_PER_SEC;
 	data->total_time += frame_time;
 	data->frame_count++;
@@ -96,6 +97,7 @@ void	print_fps(t_data *data)
 int	display_handler(t_data *data)
 {
 	data->start_time = clock();
+	bound_mouse(data);
 	ft_new_image(data, WIDTH, HEIGHT);
 	draw_background(data);
 	do_rays(data, data->dir, 1);

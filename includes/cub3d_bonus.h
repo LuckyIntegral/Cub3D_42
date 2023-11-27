@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 14:30:30 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/27 20:18:27 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define IMAGE_SIZE 1024
 # define SPEED 200
 # define ROTATE_SPEED 0.174533
+# define MOUSE_ROTATE_SPEED 0.0523599
 # define DIR_L 100
 # define FOV 1.0472
 
@@ -149,6 +150,7 @@ void			rotate_vec(double *beg_x, double *beg_y, double *end_x,
 void			rotate_vec_back(double *beg_x, double *beg_y, double *end_x,
 					double *end_y);
 int				key_handler(int key, t_data *data);
+void			bound_mouse(t_data *data);
 
 // exit utils
 void			clean_input_structure(t_input *data);
