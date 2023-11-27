@@ -1,10 +1,24 @@
-EA ./textures/graffiti_1.xpm
-NO ./textures/graffiti_2.xpm
-SO ./textures/graffiti_3.xpm
-WE ./textures/graffiti_4.xpm
+EA        ./textures/graffiti_1.xpm
+NO    ./textures/graffiti_2.xpm
 
-F 164,169,20
-C 153,204,255
+
+
+
+
+SO     ./textures/graffiti_3.xpm
+
+F    164,       169,   20
+C    153,   204,   255
+
+WE      ./textures/graffiti_4.xpm
+
+
+
+
+
+111
+101
+111
 
 11111111111111
 10111000111011

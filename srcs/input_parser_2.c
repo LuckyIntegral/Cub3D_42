@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:10:14 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 20:08:45 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 20:38:37 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static int	is_valid_rgb(char *str)
 		if ((j != 3 && str[i] != ',') || (j == 3 && str[i] != '\n'))
 			return (0);
 		str += i + 1;
+		while (*str == ' ' || *str == '\t')
+			str++;
 	}
 	return (1);
 }
