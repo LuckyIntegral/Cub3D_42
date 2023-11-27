@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:20:12 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 20:09:03 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 22:13:54 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	go_forward(t_data *data)
 	const double	delta_y = (data->dir.y - data->player.y) / DIR_L;
 
 	if (data->input.map[(int)data->player.y / IMAGE_SIZE][(int)(data->player.x
-		+ SPEED * delta_x) / IMAGE_SIZE] == '0')
+		+ SPEED * delta_x) / IMAGE_SIZE] == EMPTY)
 	{
 		data->player.x += SPEED * delta_x;
 		data->dir.x += SPEED * delta_x;
@@ -26,7 +26,7 @@ void	go_forward(t_data *data)
 		data->plane2.x += SPEED * delta_x;
 	}
 	if (data->input.map[(int)(data->player.y + SPEED * delta_y)
-		/ IMAGE_SIZE][(int)(data->player.x / IMAGE_SIZE)] == '0')
+		/ IMAGE_SIZE][(int)(data->player.x / IMAGE_SIZE)] == EMPTY)
 	{
 		data->player.y += SPEED * delta_y;
 		data->dir.y += SPEED * delta_y;
@@ -41,7 +41,7 @@ void	go_backward(t_data *data)
 	const double	delta_y = -(data->dir.y - data->player.y) / DIR_L;
 
 	if (data->input.map[(int)data->player.y / IMAGE_SIZE][(int)(data->player.x
-		+ SPEED * delta_x) / IMAGE_SIZE] == '0')
+		+ SPEED * delta_x) / IMAGE_SIZE] == EMPTY)
 	{
 		data->player.x += SPEED * delta_x;
 		data->dir.x += SPEED * delta_x;
@@ -49,7 +49,7 @@ void	go_backward(t_data *data)
 		data->plane2.x += SPEED * delta_x;
 	}
 	if (data->input.map[(int)(data->player.y + SPEED * delta_y)
-		/ IMAGE_SIZE][(int)(data->player.x / IMAGE_SIZE)] == '0')
+		/ IMAGE_SIZE][(int)(data->player.x / IMAGE_SIZE)] == EMPTY)
 	{
 		data->player.y += SPEED * delta_y;
 		data->dir.y += SPEED * delta_y;
@@ -64,7 +64,7 @@ void	go_left(t_data *data)
 	const double	delta_y = -(data->dir.x - data->player.x) / DIR_L;
 
 	if (data->input.map[(int)data->player.y / IMAGE_SIZE][(int)(data->player.x
-		+ SPEED * delta_x) / IMAGE_SIZE] == '0')
+		+ SPEED * delta_x) / IMAGE_SIZE] == EMPTY)
 	{
 		data->player.x += SPEED * delta_x;
 		data->dir.x += SPEED * delta_x;
@@ -72,7 +72,7 @@ void	go_left(t_data *data)
 		data->plane2.x += SPEED * delta_x;
 	}
 	if (data->input.map[(int)(data->player.y + SPEED * delta_y)
-		/ IMAGE_SIZE][(int)(data->player.x / IMAGE_SIZE)] == '0')
+		/ IMAGE_SIZE][(int)(data->player.x / IMAGE_SIZE)] == EMPTY)
 	{
 		data->player.y += SPEED * delta_y;
 		data->dir.y += SPEED * delta_y;
@@ -87,7 +87,7 @@ void	go_right(t_data *data)
 	const double	delta_y = (data->dir.x - data->player.x) / DIR_L;
 
 	if (data->input.map[(int)data->player.y / IMAGE_SIZE][(int)(data->player.x
-		+ SPEED * delta_x) / IMAGE_SIZE] == '0')
+		+ SPEED * delta_x) / IMAGE_SIZE] == EMPTY)
 	{
 		data->player.x += SPEED * delta_x;
 		data->dir.x += SPEED * delta_x;
@@ -95,7 +95,7 @@ void	go_right(t_data *data)
 		data->plane2.x += SPEED * delta_x;
 	}
 	if (data->input.map[(int)(data->player.y + SPEED * delta_y)
-		/ IMAGE_SIZE][(int)(data->player.x / IMAGE_SIZE)] == '0')
+		/ IMAGE_SIZE][(int)(data->player.x / IMAGE_SIZE)] == EMPTY)
 	{
 		data->player.y += SPEED * delta_y;
 		data->dir.y += SPEED * delta_y;

@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 20:10:20 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 22:12:05 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@
 # define MMAP_PLAYER 0xFF0000 // Red
 # define MMAP_EMPTY 0x00FF00  // Green
 # define MMAP_WALL 0x808080   // Gray
+
+// map macroses
+# define EMPTY '0'
+# define WALL '1'
 
 typedef enum e_error_mode
 {

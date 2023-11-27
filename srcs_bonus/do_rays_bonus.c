@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   do_rays.c                                          :+:      :+:    :+:   */
+/*   do_rays_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:19:58 by dgutak            #+#    #+#             */
-/*   Updated: 2023/11/26 20:11:33 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 22:27:59 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	bresenham(t_data *data, t_point p1, t_point p2, double length)
 	{
 		if (IMAGE_SIZE * data->input.width > p1.x && IMAGE_SIZE
 			* data->input.height > p1.y && data->input.map[(int)p1.y
-				/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] != '0')
+				/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] != EMPTY)
 		{
 			try_draw(data, p1, ex);
 			break ;

@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:43:26 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 16:23:52 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 22:16:43 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,27 @@ void	draw_cell(t_data *data, int x, int y, int color)
 		}
 		x++;
 	}
+}
+
+static void	put_square(t_data *data, int x, int y, char type)
+{
+	int	color;
+
+	if (type == EMPTY)
+		color = MMAP_EMPTY;
+	else if (type == WALL)
+		color = MMAP_WALL;
+	else if (type == DOOR_OPEN)
+		color = MMAP_DOOR;
+	else if (type == DOOR_CLOSED)
+		color = MMAP_CLOSED_DOOR;
+	else
+		color = MMAP_PLAYER;
+	draw_cell(
+		data,
+		(x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
+		(y + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + y,
+		color);
 }
 
 static void	draw_border(t_data *data)
@@ -80,13 +101,8 @@ void	draw_minimap(t_data *data)
 		y = ft_tr(py < MMAP_RADIUS - 1, -py, -MMAP_RADIUS + 1);
 		while (y <= MMAP_RADIUS - 1 && py + y < data->input.height)
 		{
-			if (data->input.map[py + y][px + x] == '0')
-				draw_cell(data, (x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
-					(y + MMAP_RADIUS) * MMAP_SIZE
-					+ MMAP_RADIUS + y, MMAP_EMPTY);
-			else if (data->input.map[py + y][px + x] == '1')
-				draw_cell(data, (x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
-					(y + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + y, MMAP_WALL);
+			if (ft_contains("01DC", data->input.map[py + y][px + x]))
+				put_square(data, x, y, data->input.map[py + y][px + x]);
 			y++;
 		}
 		x++;

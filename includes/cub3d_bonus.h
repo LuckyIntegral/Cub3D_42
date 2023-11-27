@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 20:18:27 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 22:11:51 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,16 @@
 # define MMAP_SIZE 8
 # define MMAP_BORDER 0x0000FF // Blue
 # define MMAP_PLAYER 0xFF0000 // Red
-# define MMAP_EMPTY 0x00FF00  // Green
-# define MMAP_WALL 0x808080   // Gray
+# define MMAP_EMPTY 0x00FF00 // Green
+# define MMAP_WALL 0x808080 // Gray
+# define MMAP_CLOSED_DOOR 0x800000 // Dark Orange
+# define MMAP_DOOR 0x000000  // Orange
+
+// map macroses
+# define EMPTY '0'
+# define WALL '1'
+# define DOOR_OPEN 'D'
+# define DOOR_CLOSED 'C'
 
 typedef enum e_error_mode
 {

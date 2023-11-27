@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:43:26 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 20:08:59 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 22:25:58 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ void	draw_minimap(t_data *data)
 		y = ft_tr(py < MMAP_RADIUS - 1, -py, -MMAP_RADIUS + 1);
 		while (y <= MMAP_RADIUS - 1 && py + y < data->input.height)
 		{
-			if (data->input.map[py + y][px + x] == '0')
+			if (data->input.map[py + y][px + x] == EMPTY)
 				draw_cell(data, (x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
 					(y + MMAP_RADIUS) * MMAP_SIZE
 					+ MMAP_RADIUS + y, MMAP_EMPTY);
-			else if (data->input.map[py + y][px + x] == '1')
+			else if (data->input.map[py + y][px + x] == WALL)
 				draw_cell(data, (x + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + x,
 					(y + MMAP_RADIUS) * MMAP_SIZE + MMAP_RADIUS + y, MMAP_WALL);
 			y++;

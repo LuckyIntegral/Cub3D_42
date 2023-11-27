@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validator.c                                    :+:      :+:    :+:   */
+/*   map_validator_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 14:54:09 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 20:11:16 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 22:31:51 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	find_player(t_data *data)
 				data->player.x = x * IMAGE_SIZE;
 				data->player.y = y * IMAGE_SIZE;
 				set_camera(data, x, y);
-				data->input.map[y][x] = '0';
+				data->input.map[y][x] = EMPTY;
 			}
 		}
 	}
@@ -45,14 +45,14 @@ static int	check_borders(t_input *data)
 	i = 0;
 	while (i < data->height)
 	{
-		if (data->map[i][0] == '0' || data->map[i][data->width - 1] == '0')
+		if (data->map[i][0] == EMPTY || data->map[i][data->width - 1] == EMPTY)
 			return (1);
 		i++;
 	}
 	i = 0;
 	while (i < data->width)
 	{
-		if (data->map[0][i] == '0' || data->map[data->height - 1][i] == '0')
+		if (data->map[0][i] == EMPTY || data->map[data->height - 1][i] == EMPTY)
 			return (1);
 		i++;
 	}
@@ -70,7 +70,7 @@ static int	validate_chars(t_input *data)
 		x = 0;
 		while (x < data->width)
 		{
-			if (!ft_contains("10 NSWE", data->map[y][x]))
+			if (!ft_contains("10 NSWED", data->map[y][x]))
 				return (1);
 			x++;
 		}
@@ -90,7 +90,7 @@ static int	check_walls(t_input *data)
 		x = 1;
 		while (x < data->width - 1)
 		{
-			if (ft_contains("NSWE0", data->map[y][x]))
+			if (ft_contains("NSWE0D", data->map[y][x]))
 			{
 				if (data->map[y][x + 1] == ' ' || data->map[y][x - 1] == ' '
 					|| data->map[y + 1][x] == ' ' || data->map[y - 1][x] == ' ')
