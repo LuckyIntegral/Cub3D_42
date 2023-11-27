@@ -1,6 +1,7 @@
 .nfs*
 .vscode/*
-/objs
+srcs/objs
+srcs_bonus/objs
 /libft/*.o
 libft/libft.a
 cub3D
