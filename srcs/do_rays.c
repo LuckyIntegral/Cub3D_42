@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:19:58 by dgutak            #+#    #+#             */
-/*   Updated: 2023/11/27 22:22:42 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 23:06:47 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	draw_view(t_data *data, double dist, t_point p)
 
 void	try_draw(t_data *data, t_point p1, double ex)
 {
-	if (data->input.map[(int)p1.y / IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] == EMPTY)
+	if (data->input.map[(int)p1.y / IMAGE_SIZE]
+		[(int)p1.x / IMAGE_SIZE] == EMPTY)
 		p1.x -= ex;
 	draw_view(data, sqrt(pow(data->player.y - p1.y, 2) + pow(data->player.x
 				- p1.x, 2)) * cos(fabs(data->ray_angle)), p1);

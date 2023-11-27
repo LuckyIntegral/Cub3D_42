@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 22:11:51 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 23:08:15 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ void			rotate_vec_back(double *beg_x, double *beg_y, double *end_x,
 					double *end_y);
 int				key_handler(int key, t_data *data);
 void			bound_mouse(t_data *data);
+void			open_doors(t_data *data);
 
 // exit utils
 void			clean_input_structure(t_input *data);

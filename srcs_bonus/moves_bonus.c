@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:20:12 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 22:18:49 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 23:07:55 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,29 +110,6 @@ void	go_right(t_data *data)
 		data->plane.y += SPEED * delta_y;
 		data->plane2.y += SPEED * delta_y;
 	}
-}
-
-void	open_doors(t_data *data)
-{
-	const int	x = (int)(data->player.x / IMAGE_SIZE);
-	const int	y = (int)(data->player.y / IMAGE_SIZE);
-
-	if (data->input.map[y][x + 1] == DOOR_OPEN)
-		data->input.map[y][x + 1] = DOOR_CLOSED;
-	else if (data->input.map[y][x - 1] == DOOR_OPEN)
-		data->input.map[y][x - 1] = DOOR_CLOSED;
-	else if (data->input.map[y + 1][x] == DOOR_OPEN)
-		data->input.map[y + 1][x] = DOOR_CLOSED;
-	else if (data->input.map[y - 1][x] == DOOR_OPEN)
-		data->input.map[y - 1][x] = DOOR_CLOSED;
-	else if (data->input.map[y][x + 1] == DOOR_CLOSED)
-		data->input.map[y][x + 1] = DOOR_OPEN;
-	else if (data->input.map[y][x - 1] == DOOR_CLOSED)
-		data->input.map[y][x - 1] = DOOR_OPEN;
-	else if (data->input.map[y + 1][x] == DOOR_CLOSED)
-		data->input.map[y + 1][x] = DOOR_OPEN;
-	else if (data->input.map[y - 1][x] == DOOR_CLOSED)
-		data->input.map[y - 1][x] = DOOR_OPEN;
 }
 
 int	key_handler(int key, t_data *data)

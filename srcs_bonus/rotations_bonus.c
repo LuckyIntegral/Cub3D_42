@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotations.c                                        :+:      :+:    :+:   */
+/*   rotations_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:24:06 by dgutak            #+#    #+#             */
-/*   Updated: 2023/11/26 20:11:00 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 23:08:36 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,27 @@ void	turn_right(t_data *data)
 		&data->player.y);
 	rotate_vec(&data->plane2.x, &data->plane2.y, &data->player.x,
 		&data->player.y);
+}
+
+void	open_doors(t_data *data)
+{
+	const int	x = (int)(data->player.x / IMAGE_SIZE);
+	const int	y = (int)(data->player.y / IMAGE_SIZE);
+
+	if (data->input.map[y][x + 1] == DOOR_OPEN)
+		data->input.map[y][x + 1] = DOOR_CLOSED;
+	else if (data->input.map[y][x - 1] == DOOR_OPEN)
+		data->input.map[y][x - 1] = DOOR_CLOSED;
+	else if (data->input.map[y + 1][x] == DOOR_OPEN)
+		data->input.map[y + 1][x] = DOOR_CLOSED;
+	else if (data->input.map[y - 1][x] == DOOR_OPEN)
+		data->input.map[y - 1][x] = DOOR_CLOSED;
+	else if (data->input.map[y][x + 1] == DOOR_CLOSED)
+		data->input.map[y][x + 1] = DOOR_OPEN;
+	else if (data->input.map[y][x - 1] == DOOR_CLOSED)
+		data->input.map[y][x - 1] = DOOR_OPEN;
+	else if (data->input.map[y + 1][x] == DOOR_CLOSED)
+		data->input.map[y + 1][x] = DOOR_OPEN;
+	else if (data->input.map[y - 1][x] == DOOR_CLOSED)
+		data->input.map[y - 1][x] = DOOR_OPEN;
 }
