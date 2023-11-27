@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions_2_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:43:26 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 14:29:02 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/27 16:23:52 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
+
+void	set_camera(t_data *data, int x, int y)
+{
+	data->dir.x = x * IMAGE_SIZE - DIR_L * (data->input.map[y][x] == 'W')
+		+ DIR_L * (data->input.map[y][x] == 'E');
+	data->dir.y = y * IMAGE_SIZE - DIR_L * (data->input.map[y][x] == 'N')
+		+ DIR_L * (data->input.map[y][x] == 'S');
+	data->dir.color = 0xFF0000;
+	data->plane.color = 0xFFFF00;
+}
 
 void	draw_cell(t_data *data, int x, int y, int color)
 {

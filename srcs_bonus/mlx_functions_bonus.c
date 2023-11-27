@@ -6,21 +6,11 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 16:12:45 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 16:23:48 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
-
-void	set_camera(t_data *data, int x, int y)
-{
-	data->dir.x = x * IMAGE_SIZE - DIR_L * (data->input.map[y][x] == 'W')
-		+ DIR_L * (data->input.map[y][x] == 'E');
-	data->dir.y = y * IMAGE_SIZE - DIR_L * (data->input.map[y][x] == 'N')
-		+ DIR_L * (data->input.map[y][x] == 'S');
-	data->dir.color = 0xFF0000;
-	data->plane.color = 0xFFFF00;
-}
 
 void	ft_new_image(t_data *data, int width, int height)
 {
@@ -60,10 +50,34 @@ void	draw_background(t_data *data)
 	}
 }
 
+static void	ft_itoa_insert(int n, char *str)
+{
+	char	temp;
+	int		j;
+	int		i;
+
+	j = 0;
+	if (n == 0)
+		str[j++] = '0';
+	while (n > 0)
+	{
+		str[j++] = n % 10 + '0';
+		n /= 10;
+	}
+	i = 0;
+	j--;
+	while (i < j)
+	{
+		temp = str[i];
+		str[i++] = str[j];
+		str[j--] = temp;
+	}
+}
+
 void	print_fps(t_data *data)
 {
 	double	frame_time;
-	char	*str;
+	char	str[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	int		i;
 
 	data->end_time = clock();
@@ -71,11 +85,10 @@ void	print_fps(t_data *data)
 	data->total_time += frame_time;
 	data->frame_count++;
 	data->fps = data->frame_count / data->total_time;
-	str = ft_itoa(data->fps);
+	ft_itoa_insert(data->fps, str);
 	i = -1;
 	mlx_string_put(data->mlx_ptr, data->mlx_window, WIDTH - 20, 10, 0x00FF00,
 		str);
-	free(str);
 	data->frame_count = 0;
 	data->total_time = 0.0;
 }
