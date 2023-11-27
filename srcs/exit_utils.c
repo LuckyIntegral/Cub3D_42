@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:08:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 20:08:35 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 13:43:56 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	error_handler(char *str, int mode)
 
 void	clean_data(t_data *data)
 {
-	if (data->east_img->reference)
+	if (data->east_img && data->east_img->reference)
 		mlx_destroy_image(data->mlx_ptr, data->east_img->reference);
-	if (data->west_img->reference)
+	if (data->west_img && data->west_img->reference)
 		mlx_destroy_image(data->mlx_ptr, data->west_img->reference);
-	if (data->south_img->reference)
+	if (data->south_img && data->south_img->reference)
 		mlx_destroy_image(data->mlx_ptr, data->south_img->reference);
-	if (data->north_img->reference)
+	if (data->north_img && data->north_img->reference)
 		mlx_destroy_image(data->mlx_ptr, data->north_img->reference);
 	if (data->mlx_window)
 		mlx_destroy_window(data->mlx_ptr, data->mlx_window);

@@ -4,7 +4,7 @@
 
 CC		= cc
 RM		= rm -rf
-CFLAGS	= -Wall -Wextra -Werror -MD -MP -Ofast -march=native
+CFLAGS	= -Wall -Wextra -Werror -MD -MP -Ofast -march=native -g
 LINKS	= -L. -lmlx -lXext -lX11 -lm
 
 ###############################################################################
@@ -95,7 +95,7 @@ re		: fclean all
 reb		: fclean bonus
 
 test	: all
-	clear; valgrind --leak-check=full --track-origins=yes --show-reachable=yes --show-leak-kinds=all --error-limit=no -s ./$(NAME) maps/valid_1.cub
+	clear; valgrind --leak-check=full --track-origins=yes --show-reachable=yes --show-leak-kinds=all --error-limit=no --track-fds=yes -s ./$(NAME) valid_1.cub
 
 -include $(DEPS_B) $(DEPS)
 

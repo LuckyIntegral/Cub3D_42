@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 20:32:30 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:27:41 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,9 @@ void	init_structure(t_data *data)
 	data->player.player = 0;
 	data->player.x = 0;
 	data->player.y = 0;
+	data->fps = 0;
+	data->north_img = NULL;
+	data->south_img = NULL;
+	data->west_img = NULL;
+	data->east_img = NULL;
 }

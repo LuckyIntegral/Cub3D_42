@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moves.c                                            :+:      :+:    :+:   */
+/*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:20:12 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 20:11:08 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:29:20 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,23 @@ void	go_right(t_data *data)
 		data->plane.y += SPEED * delta_y;
 		data->plane2.y += SPEED * delta_y;
 	}
+}
+
+int	key_handler(int key, t_data *data)
+{
+	if (key == ESC)
+		close_game(data);
+	else if (key == W)
+		go_forward(data);
+	else if (key == A)
+		go_left(data);
+	else if (key == S)
+		go_backward(data);
+	else if (key == D)
+		go_right(data);
+	else if (key == XK_Left)
+		turn_left(data);
+	else if (key == XK_Right)
+		turn_right(data);
+	return (0);
 }

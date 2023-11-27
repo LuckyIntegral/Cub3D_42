@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 20:55:01 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 14:30:30 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "../libft/libft.h"
 # include <X11/keysym.h>
-# include <unistd.h>
-# include <string.h>
-# include <stdlib.h>
 # include <errno.h>
 # include <fcntl.h>
-# include <stdio.h>
 # include <math.h>
-# include <time.h>
 # include <mlx.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <time.h>
+# include <unistd.h>
 
 # define NAME "Cub 3D"
 
@@ -125,6 +125,8 @@ typedef struct s_data
 	int			ray_num;
 	double		ray_angle;
 	double		ty_step;
+	clock_t		start_time;
+	clock_t		end_time;
 }				t_data;
 
 // mlx utils
@@ -146,6 +148,7 @@ void			rotate_vec(double *beg_x, double *beg_y, double *end_x,
 					double *end_y);
 void			rotate_vec_back(double *beg_x, double *beg_y, double *end_x,
 					double *end_y);
+int				key_handler(int key, t_data *data);
 
 // exit utils
 void			clean_input_structure(t_input *data);
