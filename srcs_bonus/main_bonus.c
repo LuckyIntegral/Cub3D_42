@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/26 20:11:18 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/27 15:43:34 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ int	alloc_textures(t_data *data)
 	data->west_img = (t_image *)malloc(sizeof(t_image));
 	if (!data->west_img)
 		return (1);
+	data->west_img->reference = NULL;
+	data->north_img->reference = NULL;
+	data->south_img->reference = NULL;
+	data->east_img->reference = NULL;
 	return (0);
 }
 

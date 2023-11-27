@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 14:27:41 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/27 16:14:38 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,18 @@ int	init_images(t_data *data)
 	return (0);
 }
 
+static void	init_structure_helper(t_data *data)
+{
+	data->total_time = 0;
+	data->frame_count = 0;
+	data->fps = 0;
+	data->ray_num = 0;
+	data->ray_angle = 0;
+	data->ty_step = 0;
+	data->start_time = 0;
+	data->end_time = 0;
+}
+
 void	init_structure(t_data *data)
 {
 	data->img = NULL;
@@ -81,4 +93,5 @@ void	init_structure(t_data *data)
 	data->south_img = NULL;
 	data->west_img = NULL;
 	data->east_img = NULL;
+	init_structure_helper(data);
 }
