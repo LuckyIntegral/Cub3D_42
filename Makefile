@@ -1,69 +1,92 @@
-NAME	= cub3D
-NAME_B	= cub3D_bonus
+###############################################################################
+######                            PROPERTIES                             ######
+###############################################################################
+
 CC		= cc
 RM		= rm -rf
 CFLAGS	= -Wall -Wextra -Werror -MD -MP -Ofast -march=native
 LINKS	= -L. -lmlx -lXext -lX11 -lm
 
-SRCSDIR		= srcs
-SRCSDIR_B	= srcs_bonus
+###############################################################################
+######                               LIBFT                               ######
+###############################################################################
+
 LIBDIR		= ./libft
 LIBFT		= ${LIBDIR}/libft.a
 
-SRCS	= \
-		${SRCSDIR}/exit_utils.c \
-		${SRCSDIR}/input_validator.c \
-		${SRCSDIR}/input_parser.c \
-		${SRCSDIR}/input_parser_2.c \
-		${SRCSDIR}/map_validator.c \
-		${SRCSDIR}/mlx_functions.c \
-		${SRCSDIR}/mlx_functions_2.c \
-		${SRCSDIR}/moves.c \
-		${SRCSDIR}/init.c \
-		${SRCSDIR}/rotations.c \
-		${SRCSDIR}/do_rays.c \
-		${SRCSDIR}/main.c
+###############################################################################
+######                             MANDATORY                             ######
+###############################################################################
 
-OBJS_DIR	= objs
-OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
-DEPS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.d))
+NAME		= cub3D
+SRCSDIR		= srcs
+SRCS		= \
+			${SRCSDIR}/exit_utils.c \
+			${SRCSDIR}/input_validator.c \
+			${SRCSDIR}/input_parser.c \
+			${SRCSDIR}/input_parser_2.c \
+			${SRCSDIR}/map_validator.c \
+			${SRCSDIR}/mlx_functions.c \
+			${SRCSDIR}/mlx_functions_2.c \
+			${SRCSDIR}/moves.c \
+			${SRCSDIR}/init.c \
+			${SRCSDIR}/rotations.c \
+			${SRCSDIR}/do_rays.c \
+			${SRCSDIR}/main.c
 
-SRCS_B	= \
-		${SRCSDIR_B}/exit_utils_bonus.c \
-		${SRCSDIR_B}/input_validator_bonus.c \
-		${SRCSDIR_B}/input_parser_bonus.c \
-		${SRCSDIR_B}/input_parser_2_bonus.c \
-		${SRCSDIR_B}/map_validator_bonus.c \
-		${SRCSDIR_B}/mlx_functions_bonus.c \
-		${SRCSDIR_B}/mlx_functions_2_bonus.c \
-		${SRCSDIR_B}/moves_bonus.c \
-		${SRCSDIR_B}/init_bonus.c \
-		${SRCSDIR_B}/rotations_bonus.c \
-		${SRCSDIR_B}/do_rays_bonus.c \
-		${SRCSDIR_B}/main_bonus.c
+OBJSDIR		= ${SRCSDIR}/objs
+DEPS		= $(SRCS:${SRCSDIR}/%.c=${OBJSDIR}/%.d)
+OBJS		= $(SRCS:${SRCSDIR}/%.c=${OBJSDIR}/%.o)
 
-OBJS_B      = $(addprefix $(OBJS_DIR)/, $(SRCS_B:.c=.o))
-DEPS_B      = $(addprefix $(OBJS_DIR)/, $(SRCS_B:.c=.d))
+###############################################################################
+######                               BONUS                               ######
+###############################################################################
+
+NAME_B		= cub3D_bonus
+SRCSDIR_B	= srcs_bonus
+SRCS_B		= \
+			${SRCSDIR_B}/input_validator_bonus.c \
+			${SRCSDIR_B}/exit_utils_bonus.c \
+			${SRCSDIR_B}/input_parser_bonus.c \
+			${SRCSDIR_B}/input_parser_2_bonus.c \
+			${SRCSDIR_B}/map_validator_bonus.c \
+			${SRCSDIR_B}/mlx_functions_bonus.c \
+			${SRCSDIR_B}/mlx_functions_2_bonus.c \
+			${SRCSDIR_B}/moves_bonus.c \
+			${SRCSDIR_B}/init_bonus.c \
+			${SRCSDIR_B}/rotations_bonus.c \
+			${SRCSDIR_B}/do_rays_bonus.c \
+			${SRCSDIR_B}/main_bonus.c
+
+OBJSDIR_B	= ${SRCSDIR_B}/objs
+OBJS_B      = $(SRCS_B:${SRCSDIR_B}/%.c=${OBJSDIR_B}/%.o)
+DEPS_B      = $(SRCS_B:${SRCSDIR_B}/%.c=${OBJSDIR_B}/%.d)
 
 all		: $(NAME)
+
+bonus	: $(NAME_B)
 
 $(NAME)	: ${OBJS}
 		make --no-print-directory -C ${LIBDIR} all
 		$(CC) $(CFLAGS) -o $@ $^ $(LINKS) -L. ${LIBFT}
 
-objs/%.o	: %.c
+${OBJSDIR}/%.o		: ${SRCSDIR}/%.c
+		@mkdir -p $(dir $@)
+		${CC} ${CFLAGS} -c $< -o $@ -I ./includes
+
+${OBJSDIR_B}/%.o	: ${SRCSDIR_B}/%.c
 		@mkdir -p $(dir $@)
 		${CC} ${CFLAGS} -c $< -o $@ -I ./includes
 
 clean	:
 		make --no-print-directory -C ${LIBDIR} clean
-		$(RM) $(OBJS_DIR)
+		$(RM) $(OBJSDIR) $(OBJSDIR_B)
 
 fclean	:
 		make --no-print-directory -C ${LIBDIR} fclean
-		$(RM) $(OBJS_DIR) $(NAME) $(NAME_B)
+		$(RM) $(OBJSDIR) $(OBJSDIR_B) $(NAME) $(NAME_B)
 
-bonus	: ${OBJS_B}
+$(NAME_B)	: ${OBJS_B}
 		make --no-print-directory -C ${LIBDIR} all
 		$(CC) $(CFLAGS) -o $(NAME_B) $^ $(LINKS) -L. ${LIBFT}
 
