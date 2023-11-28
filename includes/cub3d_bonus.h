@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 13:09:04 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:14:36 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ typedef struct s_data
 	t_image		*west_img;
 	t_image		*north_img;
 	t_image		*south_img;
+	t_image		*door_img;
 	t_point		dir;
 	t_point		plane;
 	t_point		plane2;

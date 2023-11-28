@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 16:14:38 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/28 13:17:17 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ int	init_images2(t_data *data, int *x, int *y)
 	data->west_img->pixels = (int *)mlx_get_data_addr(data->west_img->reference,
 			&data->west_img->bits_per_pixel, &data->west_img->line_size,
 			&data->west_img->endian);
+	data->door_img->reference = mlx_xpm_file_to_image(data->mlx_ptr,
+			"textures/door.xpm", x, y);
+	if (!data->door_img->reference || *x != IMAGE_SIZE || *y != IMAGE_SIZE)
+		return (1);
+	data->door_img->pixels = (int *)mlx_get_data_addr(data->door_img->reference,
+			&data->door_img->bits_per_pixel, &data->door_img->line_size,
+			&data->door_img->endian);
 	return (0);
 }
 
