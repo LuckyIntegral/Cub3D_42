@@ -6,27 +6,11 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 16:38:14 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:43:14 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
-
-void	shoot(t_data *data)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == -1)
-		close_game(data);
-	if (pid == 0)
-	{
-		system("play textures/gun.mp3 >/dev/null 2> /dev/null");
-		clean_child(data);
-	}
-	data->shoot = 1;
-	open_doors(data);
-}
 
 void	clean_child(t_data *data)
 {

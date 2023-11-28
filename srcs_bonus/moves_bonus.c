@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:20:12 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 16:38:02 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:47:01 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,10 @@ int	key_handler(int key, t_data *data)
 		turn_right(data);
 	else if (key == XK_space)
 	{
-		shoot(data);
+		if (data->shoot == 0)
+			system("play textures/gun.mp3 >/dev/null 2> /dev/null");
+		data->shoot = 1;
+		open_doors(data);
 	}
 	return (0);
 }
