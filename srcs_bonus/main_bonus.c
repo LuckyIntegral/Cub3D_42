@@ -6,14 +6,11 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 20:01:14 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/28 13:31:24 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
-#include <mlx.h>
-#include <stdio.h>
-#include <unistd.h>
 
 int	alloc_textures(t_data *data)
 {
@@ -51,6 +48,7 @@ int	mlx_start_program(t_data *data)
 		return (1);
 	if (init_images(data))
 		return (1);
+	mlx_mouse_hook(data->mlx_window, &on_click, data);
 	mlx_hook(data->mlx_window, 2, 1L, &key_handler, data);
 	mlx_hook(data->mlx_window, CROSS, 0L, &close_game, data);
 	mlx_loop_hook(data->mlx_ptr, &display_handler, data);
