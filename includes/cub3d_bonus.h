@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 16:02:36 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:06:04 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void			rotate_vec_back(double *beg_x, double *beg_y, double *end_x,
 int				key_handler(int key, t_data *data);
 void			bound_mouse(t_data *data);
 void			open_doors(t_data *data);
-void clean_child(t_data *data);
+void			clean_child(t_data *data);
 
 
 // exit utils

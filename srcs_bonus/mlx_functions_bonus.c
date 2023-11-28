@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 15:36:26 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:10:32 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	put_gun(t_data *data)
 		}
 	}
 	frame++;
-	if (!(data->shoot == 1 && frame % 5 == 0))
+	if (!(data->shoot == 1 && frame % 2 == 0))
 		return ;
 	if (++data->gun_frame == 5 && data->shoot--)
 	{
