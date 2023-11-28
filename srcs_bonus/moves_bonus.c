@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:20:12 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 16:47:01 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 17:44:40 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
-#include <sys/types.h>
+#include <stdio.h>
 
 void	go_forward(t_data *data)
 {
@@ -123,6 +123,7 @@ void	go_right(t_data *data)
 
 int	key_handler(int key, t_data *data)
 {
+	printf("key: %d\n", key);
 	if (key == ESC)
 		close_game(data);
 	else if (key == W)
@@ -138,11 +139,12 @@ int	key_handler(int key, t_data *data)
 	else if (key == XK_Right)
 		turn_right(data);
 	else if (key == XK_space)
+		open_doors(data);
+	else if (key == 65507)
 	{
 		if (data->shoot == 0)
 			system("play textures/gun.mp3 >/dev/null 2> /dev/null");
 		data->shoot = 1;
-		open_doors(data);
 	}
 	return (0);
 }
