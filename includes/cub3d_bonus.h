@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 13:14:36 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:34:19 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void			rotate_vec_back(double *beg_x, double *beg_y, double *end_x,
 int				key_handler(int key, t_data *data);
 void			bound_mouse(t_data *data);
 void			open_doors(t_data *data);
+int				on_click(int code, t_data *data);
 
 // exit utils
 void			clean_input_structure(t_input *data);
