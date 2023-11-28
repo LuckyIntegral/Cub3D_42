@@ -6,11 +6,31 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 15:31:29 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:04:12 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
+
+void	clean_child(t_data *data)
+{
+	if (data->img)
+		free(data->img);
+	if (data->east_img)
+		free(data->east_img);
+	if (data->north_img)
+		free(data->north_img);
+	if (data->south_img)
+		free(data->south_img);
+	if (data->west_img)
+		free(data->west_img);
+	if (data->door_img)
+		free(data->door_img);
+	if (data->door_img)
+		free(data->door_img);
+	clean_input_structure(&data->input);
+	exit(1);
+}
 
 int	alloc_textures(t_data *data)
 {

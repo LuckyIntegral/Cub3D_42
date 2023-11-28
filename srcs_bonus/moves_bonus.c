@@ -6,11 +6,12 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:20:12 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 15:31:04 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:04:38 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
+#include <sys/types.h>
 
 void	go_forward(t_data *data)
 {
@@ -114,6 +115,8 @@ void	go_right(t_data *data)
 
 int	key_handler(int key, t_data *data)
 {
+	pid_t	pid;
+
 	if (key == ESC)
 		close_game(data);
 	else if (key == W)
@@ -130,6 +133,14 @@ int	key_handler(int key, t_data *data)
 		turn_right(data);
 	else if (key == XK_space)
 	{
+		pid = fork();
+		if (pid == -1)
+			close_game(data);
+		if (pid == 0)
+		{
+			system("play textures/gun.mp3 >/dev/null 2> /dev/null");
+			clean_child(data);
+		}
 		data->shoot = 1;
 		open_doors(data);
 	}
