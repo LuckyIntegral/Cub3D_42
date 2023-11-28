@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 22:29:47 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/28 13:47:38 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ void	print_fps(t_data *data)
 	data->frame_count = 0;
 	data->total_time = 0.0;
 }
-
+void put_gun(t_data *data)
+{
+	
+}
 int	display_handler(t_data *data)
 {
 	data->start_time = clock();
@@ -106,5 +109,6 @@ int	display_handler(t_data *data)
 		data->img->reference, 0, 0);
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);
 	print_fps(data);
+	put_gun(data);
 	return (0);
 }

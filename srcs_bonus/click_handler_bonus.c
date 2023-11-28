@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   click_handler_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:22:38 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 13:31:17 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/28 13:44:25 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 int	on_click(int code, t_data *data)
 {
-	(void)data;
-	printf("code: %d\n", code);
-	printf("put your animation here:)\n");
 	return (0);
 }
