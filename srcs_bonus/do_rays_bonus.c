@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_rays_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:19:58 by dgutak            #+#    #+#             */
-/*   Updated: 2023/11/27 22:27:59 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/28 13:11:26 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ void	put_pixel(t_data *data, t_point p, int x, double y)
 	while (++i < HEIGHT / 2 + x)
 	{
 		if ((int)tx == 0)
-			data->img->pixels[WIDTH * i + data->ray_num]
-				= data->east_img->pixels[(int)y * IMAGE_SIZE + (int)ty];
+		{
+			
+			data->img->pixels[WIDTH * i
+				+ data->ray_num] = data->east_img->pixels[(int)y * IMAGE_SIZE
+				+ (int)ty];
+		}
 		else if ((int)ty == 0)
 			data->img->pixels[WIDTH * i
 				+ data->ray_num] = data->south_img->pixels[(int)y * IMAGE_SIZE
@@ -35,8 +39,9 @@ void	put_pixel(t_data *data, t_point p, int x, double y)
 				+ data->ray_num] = data->west_img->pixels[(int)y * IMAGE_SIZE
 				+ IMAGE_SIZE - 1 - (int)ty];
 		else if ((int)ty == IMAGE_SIZE - 1)
-			data->img->pixels[WIDTH * i + data->ray_num]
-				= data->north_img->pixels[(int)y * IMAGE_SIZE + (int)tx];
+			data->img->pixels[WIDTH * i
+				+ data->ray_num] = data->north_img->pixels[(int)y * IMAGE_SIZE
+				+ (int)tx];
 		y += data->ty_step;
 	}
 }
@@ -84,7 +89,9 @@ void	bresenham(t_data *data, t_point p1, t_point p2, double length)
 	{
 		if (IMAGE_SIZE * data->input.width > p1.x && IMAGE_SIZE
 			* data->input.height > p1.y && data->input.map[(int)p1.y
-				/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] != EMPTY)
+				/ IMAGE_SIZE][(int)p1.x / IMAGE_SIZE] != EMPTY
+			&& data->input.map[(int)p1.y / IMAGE_SIZE][(int)p1.x
+			/ IMAGE_SIZE] != 'C')
 		{
 			try_draw(data, p1, ex);
 			break ;
