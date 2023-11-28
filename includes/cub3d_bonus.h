@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 13:34:19 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/28 13:41:11 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ void			draw_cell(t_data *data, int x, int y, int color);
 void			draw_minimap(t_data *data);
 int				key_handler(int key, t_data *data);
 void			do_rays(t_data *data, t_point dir, double length);
+void			decide_pixel(t_data *data, t_point p, int i, double y);
 
 // rotation v1
 void			go_right(t_data *data);

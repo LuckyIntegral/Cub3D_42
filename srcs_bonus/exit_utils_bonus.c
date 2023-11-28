@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:08:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 14:28:05 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:28:10 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ void	error_handler(char *str, int mode)
 	exit(1);
 }
 
+void	kill_door(t_data *data)
+{
+	if (data->door_img && data->door_img->reference)
+		mlx_destroy_image(data->mlx_ptr, data->door_img->reference);
+	if (data->door_img)
+		free(data->door_img);
+}
+
 void	clean_data(t_data *data)
 {
 	if (data->east_img && data->east_img->reference)
@@ -39,6 +47,7 @@ void	clean_data(t_data *data)
 		mlx_destroy_image(data->mlx_ptr, data->south_img->reference);
 	if (data->north_img && data->north_img->reference)
 		mlx_destroy_image(data->mlx_ptr, data->north_img->reference);
+	kill_door(data);
 	if (data->mlx_window)
 		mlx_destroy_window(data->mlx_ptr, data->mlx_window);
 	if (data->mlx_ptr)

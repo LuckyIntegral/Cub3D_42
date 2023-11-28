@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 15:19:58 by dgutak            #+#    #+#             */
-/*   Updated: 2023/11/28 13:25:23 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:37:22 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,54 +23,7 @@ void	put_pixel(t_data *data, t_point p, int x, double y)
 	i = HEIGHT / 2 - x - 1;
 	while (++i < HEIGHT / 2 + x)
 	{
-		if ((int)tx == 0)
-		{
-			if (data->input.map[(int)p.y / IMAGE_SIZE][(int)p.x
-				/ IMAGE_SIZE] == 'D')
-				data->img->pixels[WIDTH * i
-					+ data->ray_num] = data->door_img->pixels[(int)y
-					* IMAGE_SIZE + (int)ty];
-			else
-				data->img->pixels[WIDTH * i
-					+ data->ray_num] = data->east_img->pixels[(int)y
-					* IMAGE_SIZE + (int)ty];
-		}
-		else if ((int)ty == 0)
-		{
-			if (data->input.map[(int)p.y / IMAGE_SIZE][(int)p.x
-				/ IMAGE_SIZE] == 'D')
-				data->img->pixels[WIDTH * i
-					+ data->ray_num] = data->door_img->pixels[(int)y
-					* IMAGE_SIZE + IMAGE_SIZE - 1 - (int)tx];
-			else
-				data->img->pixels[WIDTH * i
-					+ data->ray_num] = data->south_img->pixels[(int)y
-					* IMAGE_SIZE + IMAGE_SIZE - 1 - (int)tx];
-		}
-		else if ((int)tx == IMAGE_SIZE - 1)
-		{
-			if (data->input.map[(int)p.y / IMAGE_SIZE][(int)p.x
-				/ IMAGE_SIZE] == 'D')
-				data->img->pixels[WIDTH * i
-					+ data->ray_num] = data->door_img->pixels[(int)y
-					* IMAGE_SIZE + IMAGE_SIZE - 1 - (int)ty];
-			else
-				data->img->pixels[WIDTH * i
-					+ data->ray_num] = data->west_img->pixels[(int)y
-					* IMAGE_SIZE + IMAGE_SIZE - 1 - (int)ty];
-		}
-		else if ((int)ty == IMAGE_SIZE - 1)
-		{
-			if (data->input.map[(int)p.y / IMAGE_SIZE][(int)p.x
-				/ IMAGE_SIZE] == 'D')
-				data->img->pixels[WIDTH * i
-					+ data->ray_num] = data->door_img->pixels[(int)y
-					* IMAGE_SIZE + IMAGE_SIZE - 1 - (int)tx];
-			else
-				data->img->pixels[WIDTH * i
-					+ data->ray_num] = data->north_img->pixels[(int)y
-					* IMAGE_SIZE + (int)tx];
-		}
+		decide_pixel(data, p, i, y);
 		y += data->ty_step;
 	}
 }
