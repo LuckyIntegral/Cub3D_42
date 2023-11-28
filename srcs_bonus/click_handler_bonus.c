@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   click_handler_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:22:38 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 14:49:28 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:54:54 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	on_click(int code, t_data *data)
 {
-	data->shoot = 1;
+	data->frame_count = 1;
 	(void)code;
 	return (0);
 }

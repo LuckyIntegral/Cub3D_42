@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 14:49:21 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 15:14:42 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	put_gun(t_data *data)
 	int			i;
 	int			j;
 	int			pix;
-	static int	frame = 0;
+	static int	frame;
 
 	i = -1;
 	while (++i < 828)
@@ -113,11 +113,16 @@ void	put_gun(t_data *data)
 						* (data->gun_frame - 1)) + 570] = pix;
 		}
 	}
-	if (++frame == 5 && data->shoot == 1)
+	frame++;
+	if (data->shoot == 1 && frame % 5 == 0 )
 	{
-		if (++data->gun_frame == 3 && data->shoot--)
-			data->gun_frame = 0;
-		frame = 0;
+		frame++;
+		if (++data->gun_frame == 5)
+		{
+			data->shoot = 0;
+			data->gun_frame = 1;
+			frame = 0;
+		}
 	}
 }
 
