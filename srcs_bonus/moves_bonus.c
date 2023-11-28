@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:20:12 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 14:59:21 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/28 15:31:04 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ int	key_handler(int key, t_data *data)
 		turn_right(data);
 	else if (key == XK_space)
 	{
-		printf("You have been eaten by a grue.\n");
 		data->shoot = 1;
+		open_doors(data);
 	}
 	return (0);
 }

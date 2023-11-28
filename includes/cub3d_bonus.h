@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 14:47:52 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 15:32:27 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 // random
 # define CROSS 17
 # define IMAGE_SIZE 1024
-# define SPEED 200
+# define SPEED 100
 # define ROTATE_SPEED 0.174533
 # define MOUSE_ROTATE_SPEED 0.0523599
 # define DIR_L 100

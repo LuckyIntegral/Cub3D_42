@@ -57,7 +57,6 @@ SRCS_B		= \
 			${SRCSDIR_B}/rotations_bonus.c \
 			${SRCSDIR_B}/do_rays_bonus.c \
 			${SRCSDIR_B}/mouse_handler_bonus.c \
-			${SRCSDIR_B}/click_handler_bonus.c \
 			${SRCSDIR_B}/main_bonus.c \
 			${SRCSDIR_B}/decide_pixel_bonus.c
 

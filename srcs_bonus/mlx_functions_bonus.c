@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_functions_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 15:14:42 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/28 15:36:26 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
-
-void	ft_new_image(t_data *data, int width, int height)
-{
-	data->img->reference = mlx_new_image(data->mlx_ptr, width, height);
-	data->img->pixels = (int *)mlx_get_data_addr(data->img->reference,
-			&data->img->bits_per_pixel, &data->img->line_size,
-			&data->img->endian);
-	data->img->bits_per_pixel /= 8;
-}
 
 void	draw_background(t_data *data)
 {
@@ -114,15 +105,12 @@ void	put_gun(t_data *data)
 		}
 	}
 	frame++;
-	if (data->shoot == 1 && frame % 5 == 0 )
+	if (!(data->shoot == 1 && frame % 5 == 0))
+		return ;
+	if (++data->gun_frame == 5 && data->shoot--)
 	{
-		frame++;
-		if (++data->gun_frame == 5)
-		{
-			data->shoot = 0;
-			data->gun_frame = 1;
-			frame = 0;
-		}
+		data->gun_frame = 1;
+		frame = 0;
 	}
 }
 
