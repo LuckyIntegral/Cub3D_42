@@ -99,7 +99,7 @@ re		: fclean all
 reb		: fclean bonus
 
 test	: all
-	clear; valgrind --leak-check=full --track-origins=yes --show-reachable=yes --show-leak-kinds=all --error-limit=no --track-fds=yes -s ./$(NAME) valid_1.cub
+	clear; valgrind --leak-check=full --track-origins=yes --show-reachable=yes --show-leak-kinds=all --error-limit=no --track-fds=yes -s ./$(NAME)_bonus maps/bonus_cart_lab.cub
 
 -include $(DEPS_B) $(DEPS)
 
