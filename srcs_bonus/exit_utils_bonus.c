@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:08:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 13:28:10 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 13:56:01 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void	kill_door(t_data *data)
 		mlx_destroy_image(data->mlx_ptr, data->door_img->reference);
 	if (data->door_img)
 		free(data->door_img);
+	if (data->gun_img && data->gun_img->reference)
+		mlx_destroy_image(data->mlx_ptr, data->gun_img->reference);
+	if (data->gun_img)
+		free(data->gun_img);
 }
 
 void	clean_data(t_data *data)

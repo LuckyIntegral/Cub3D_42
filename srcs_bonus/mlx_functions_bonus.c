@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:08:10 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 13:47:38 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:49:21 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,34 @@ void	print_fps(t_data *data)
 	data->frame_count = 0;
 	data->total_time = 0.0;
 }
-void put_gun(t_data *data)
+
+void	put_gun(t_data *data)
 {
-	
+	int			i;
+	int			j;
+	int			pix;
+	static int	frame = 0;
+
+	i = -1;
+	while (++i < 828)
+	{
+		j = 2388 / 4 * (data->gun_frame - 1) - 1;
+		while (++j < 2388 / 4 * data->gun_frame)
+		{
+			pix = data->gun_img->pixels[2388 * i + j];
+			if (pix != 0xFFFFFF && i > 30)
+				data->img->pixels[WIDTH * (i + 75) + (j - 2388 / 4
+						* (data->gun_frame - 1)) + 570] = pix;
+		}
+	}
+	if (++frame == 5 && data->shoot == 1)
+	{
+		if (++data->gun_frame == 3 && data->shoot--)
+			data->gun_frame = 0;
+		frame = 0;
+	}
 }
+
 int	display_handler(t_data *data)
 {
 	data->start_time = clock();
@@ -105,10 +129,10 @@ int	display_handler(t_data *data)
 	draw_background(data);
 	do_rays(data, data->dir, 1);
 	draw_minimap(data);
+	put_gun(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window,
 		data->img->reference, 0, 0);
 	mlx_destroy_image(data->mlx_ptr, data->img->reference);
 	print_fps(data);
-	put_gun(data);
 	return (0);
 }

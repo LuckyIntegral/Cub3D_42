@@ -6,7 +6,7 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:23:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 13:41:11 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:47:52 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@
 // minimap utils
 # define MMAP_RADIUS 10
 # define MMAP_SIZE 8
-# define MMAP_BORDER 0x0000FF // Blue
-# define MMAP_PLAYER 0xFF0000 // Red
-# define MMAP_EMPTY 0x00FF00 // Green
-# define MMAP_WALL 0x808080 // Gray
+# define MMAP_BORDER 0x0000FF      // Blue
+# define MMAP_PLAYER 0xFF0000      // Red
+# define MMAP_EMPTY 0x00FF00       // Green
+# define MMAP_WALL 0x808080        // Gray
 # define MMAP_CLOSED_DOOR 0x800000 // Dark Orange
-# define MMAP_DOOR 0x000000  // Orange
+# define MMAP_DOOR 0x000000        // Orange
 
 // map macroses
 # define EMPTY '0'
@@ -126,6 +126,7 @@ typedef struct s_data
 	t_image		*north_img;
 	t_image		*south_img;
 	t_image		*door_img;
+	t_image		*gun_img;
 	t_point		dir;
 	t_point		plane;
 	t_point		plane2;
@@ -137,6 +138,8 @@ typedef struct s_data
 	double		ty_step;
 	clock_t		start_time;
 	clock_t		end_time;
+	int			shoot;
+	int			gun_frame;
 }				t_data;
 
 // mlx utils

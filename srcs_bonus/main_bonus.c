@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
+/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 13:33:06 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/28 14:48:43 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,21 @@
 int	alloc_textures(t_data *data)
 {
 	data->img = (t_image *)malloc(sizeof(t_image));
-	if (!data->img)
-		return (1);
 	data->east_img = (t_image *)malloc(sizeof(t_image));
-	if (!data->east_img)
-		return (1);
 	data->north_img = (t_image *)malloc(sizeof(t_image));
-	if (!data->north_img)
-		return (1);
 	data->south_img = (t_image *)malloc(sizeof(t_image));
-	if (!data->south_img)
-		return (1);
 	data->west_img = (t_image *)malloc(sizeof(t_image));
-	if (!data->west_img)
-		return (1);
 	data->door_img = (t_image *)malloc(sizeof(t_image));
-	if (!data->door_img)
+	data->gun_img = (t_image *)malloc(sizeof(t_image));
+	if (!data->east_img || !data->img || !data->north_img || !data->south_img
+		|| !data->west_img || !data->door_img || !data->gun_img)
 		return (1);
 	data->west_img->reference = NULL;
 	data->north_img->reference = NULL;
 	data->south_img->reference = NULL;
 	data->door_img->reference = NULL;
 	data->east_img->reference = NULL;
+	data->gun_img->reference = NULL;
 	return (0);
 }
 

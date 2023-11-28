@@ -6,11 +6,30 @@
 /*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 13:17:17 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:49:47 by dgutak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
+
+int	init_bonus_textures(t_data *data, int *x, int *y)
+{
+	data->door_img->reference = mlx_xpm_file_to_image(data->mlx_ptr,
+			"textures/door.xpm", x, y);
+	if (!data->door_img->reference || *x != IMAGE_SIZE || *y != IMAGE_SIZE)
+		return (1);
+	data->door_img->pixels = (int *)mlx_get_data_addr(data->door_img->reference,
+			&data->door_img->bits_per_pixel, &data->door_img->line_size,
+			&data->door_img->endian);
+	data->gun_img->reference = mlx_xpm_file_to_image(data->mlx_ptr,
+			"textures/gun.xpm", x, y);
+	if (!data->gun_img->reference)
+		return (1);
+	data->gun_img->pixels = (int *)mlx_get_data_addr(data->gun_img->reference,
+			&data->gun_img->bits_per_pixel, &data->gun_img->line_size,
+			&data->gun_img->endian);
+	return (0);
+}
 
 int	init_images2(t_data *data, int *x, int *y)
 {
@@ -29,13 +48,8 @@ int	init_images2(t_data *data, int *x, int *y)
 	data->west_img->pixels = (int *)mlx_get_data_addr(data->west_img->reference,
 			&data->west_img->bits_per_pixel, &data->west_img->line_size,
 			&data->west_img->endian);
-	data->door_img->reference = mlx_xpm_file_to_image(data->mlx_ptr,
-			"textures/door.xpm", x, y);
-	if (!data->door_img->reference || *x != IMAGE_SIZE || *y != IMAGE_SIZE)
+	if (init_bonus_textures(data, x, y) == 1)
 		return (1);
-	data->door_img->pixels = (int *)mlx_get_data_addr(data->door_img->reference,
-			&data->door_img->bits_per_pixel, &data->door_img->line_size,
-			&data->door_img->endian);
 	return (0);
 }
 
@@ -76,6 +90,8 @@ static void	init_structure_helper(t_data *data)
 	data->ty_step = 0;
 	data->start_time = 0;
 	data->end_time = 0;
+	data->gun_frame = 1;
+	data->shoot = 0;
 }
 
 void	init_structure(t_data *data)
@@ -100,5 +116,7 @@ void	init_structure(t_data *data)
 	data->south_img = NULL;
 	data->west_img = NULL;
 	data->east_img = NULL;
+	data->door_img = NULL;
+	data->gun_img = NULL;
 	init_structure_helper(data);
 }
