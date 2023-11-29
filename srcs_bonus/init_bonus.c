@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 14:45:36 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 14:49:47 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/29 12:39:19 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	init_images(t_data *data)
 			&data->east_img->endian);
 	if (init_images2(data, &x, &y))
 		return (1);
+	mlx_mouse_move(data->mlx_ptr, data->mlx_window, WIDTH / 2, HEIGHT / 2);
 	return (0);
 }
 

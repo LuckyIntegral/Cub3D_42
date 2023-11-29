@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 17:29:23 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/29 12:26:45 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	alloc_textures(t_data *data)
 	if (!data->east_img || !data->img || !data->north_img || !data->south_img
 		|| !data->west_img || !data->door_img || !data->gun_img)
 		return (1);
+	data->img->reference = NULL;
 	data->west_img->reference = NULL;
 	data->north_img->reference = NULL;
 	data->south_img->reference = NULL;

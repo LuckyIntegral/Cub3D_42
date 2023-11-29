@@ -6,12 +6,11 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:20:12 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/28 17:44:40 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/29 12:22:30 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
-#include <stdio.h>
 
 void	go_forward(t_data *data)
 {
@@ -123,7 +122,6 @@ void	go_right(t_data *data)
 
 int	key_handler(int key, t_data *data)
 {
-	printf("key: %d\n", key);
 	if (key == ESC)
 		close_game(data);
 	else if (key == W)

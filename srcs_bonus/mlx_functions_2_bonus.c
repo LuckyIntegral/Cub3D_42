@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:43:26 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 22:16:43 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/29 12:33:07 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	set_camera(t_data *data, int x, int y)
 {
-	data->dir.x = x * IMAGE_SIZE - DIR_L * (data->input.map[y][x] == 'W')
+	data->dir.x = x * IMAGE_SIZE + IMAGE_SIZE / 2
+		- DIR_L * (data->input.map[y][x] == 'W')
 		+ DIR_L * (data->input.map[y][x] == 'E');
-	data->dir.y = y * IMAGE_SIZE - DIR_L * (data->input.map[y][x] == 'N')
+	data->dir.y = y * IMAGE_SIZE + IMAGE_SIZE / 2
+		- DIR_L * (data->input.map[y][x] == 'N')
 		+ DIR_L * (data->input.map[y][x] == 'S');
 	data->dir.color = 0xFF0000;
 	data->plane.color = 0xFFFF00;
