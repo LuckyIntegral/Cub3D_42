@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgutak <dgutak@student.42vienna.com>       +#+  +:+       +#+        */
+/*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:08:44 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/27 13:43:56 by dgutak           ###   ########.fr       */
+/*   Updated: 2023/11/29 13:06:12 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	close_game(t_data *data)
 
 void	error_handler(char *str, int mode)
 {
-	write(2, "Error,\n", 7);
+	write(2, "Error\n", 6);
 	if (mode == DEFAULT)
 		perror(str);
 	else

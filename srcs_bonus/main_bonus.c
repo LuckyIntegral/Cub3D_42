@@ -6,7 +6,7 @@
 /*   By: vfrants <vfrants@student.42vienna.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 12:41:53 by vfrants           #+#    #+#             */
-/*   Updated: 2023/11/29 12:26:45 by vfrants          ###   ########.fr       */
+/*   Updated: 2023/11/29 13:02:08 by vfrants          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,43 @@ void	clean_child(t_data *data)
 	exit(1);
 }
 
+int	alloc_texture_2(t_data *data)
+{
+	data->door_img = (t_image *)malloc(sizeof(t_image));
+	if (!data->door_img)
+		return (1);
+	ft_bzero(data->door_img, sizeof(t_image));
+	data->gun_img = (t_image *)malloc(sizeof(t_image));
+	if (!data->gun_img)
+		return (1);
+	ft_bzero(data->gun_img, sizeof(t_image));
+	return (0);
+}
+
 int	alloc_textures(t_data *data)
 {
 	data->img = (t_image *)malloc(sizeof(t_image));
-	data->east_img = (t_image *)malloc(sizeof(t_image));
-	data->north_img = (t_image *)malloc(sizeof(t_image));
-	data->south_img = (t_image *)malloc(sizeof(t_image));
-	data->west_img = (t_image *)malloc(sizeof(t_image));
-	data->door_img = (t_image *)malloc(sizeof(t_image));
-	data->gun_img = (t_image *)malloc(sizeof(t_image));
-	if (!data->east_img || !data->img || !data->north_img || !data->south_img
-		|| !data->west_img || !data->door_img || !data->gun_img)
+	if (!data->img)
 		return (1);
-	data->img->reference = NULL;
-	data->west_img->reference = NULL;
-	data->north_img->reference = NULL;
-	data->south_img->reference = NULL;
-	data->door_img->reference = NULL;
-	data->east_img->reference = NULL;
-	data->gun_img->reference = NULL;
+	ft_bzero(data->img, sizeof(t_image));
+	data->east_img = (t_image *)malloc(sizeof(t_image));
+	if (!data->east_img)
+		return (1);
+	ft_bzero(data->east_img, sizeof(t_image));
+	data->north_img = (t_image *)malloc(sizeof(t_image));
+	if (!data->north_img)
+		return (1);
+	ft_bzero(data->north_img, sizeof(t_image));
+	data->south_img = (t_image *)malloc(sizeof(t_image));
+	if (!data->south_img)
+		return (1);
+	ft_bzero(data->south_img, sizeof(t_image));
+	data->west_img = (t_image *)malloc(sizeof(t_image));
+	if (!data->west_img)
+		return (1);
+	ft_bzero(data->west_img, sizeof(t_image));
+	if (alloc_texture_2(data))
+		return (1);
 	return (0);
 }
 
